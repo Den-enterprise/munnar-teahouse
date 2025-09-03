@@ -85,7 +85,7 @@
 
     .btn-shop:hover {
       background-color: #d4edda;
-      color: #155724;
+      color: #f0851d;
     }
 
 
@@ -93,7 +93,7 @@
     .benefit-item {
       position: relative;
       background: url('../strip.png') no-repeat center center;
-      background-size: cover;
+      background-size: contain;
       padding: 48px 18px;
       font-family: 'Poppins', sans-serif;
       color: #222;
@@ -184,4 +184,27 @@
     .our-products-hero p {
       font-size: 1rem;
     }
-  }
+}
+/* =========================Quote Section========================= */ 
+    .quote-section {
+      background-color: #c9aa97; /* beige-like background */
+      padding: 3rem 1rem;
+    }
+    .quote-card {
+      background-color: #c9aa97;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .quote-text {
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: white;
+    }
+    .quote-author {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: white;
+    }
+    .img-fluid {
+      border-radius: 12px;
+    }

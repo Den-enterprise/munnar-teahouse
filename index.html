@@ -20,7 +20,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3 position-relative">
     <div class="container">
 
-      <a class="navbar-brand text-success" href="#"><img src="images/logo.png"></a>
+      <a class="navbar-brand text-success" href="#"><img src="images/logo.png" style="width: 45px;"/></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -41,7 +41,7 @@
     <div class="hero-content">
       <h1>Fine Organic Teas</h1>
       <p>HAND BLENDED AND CUSTOM CRAFTED</p>
-      <a href="#" class="btn btn-shop">Shop Now <i class="bi bi-bag"></i></a>
+      <a href="#" class="btn btn-shop">Shop Now <img src="images\swiggy.svg" style="width: 25px;"/></a>
     </div>
   </section>
 
@@ -61,7 +61,7 @@
         </div>
         <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
           <div class="benefit-item" style="background-image: url('images/strip3.png');">
-            <h5>Pesticides and Chemical free</h5>
+            <h5>Chemical free</h5>
           </div>
         </div>
       </div>
@@ -489,11 +489,122 @@
     </div>
   </section>
 
+  <!--- Quotee section-->
+   
+  <div class="container-fluid quote-section">
+    <div class="row align-items-center">
+      
+      <!-- Left: Image -->
+      <div class="col-md-6 text-center">
+        <img src="images/banner.webp" alt="Tea Time" class="img-fluid">
+      </div>
+      
+      <!-- Right: Quote -->
+      <div class="col-md-6 text-center text-md-start mt-4 mt-md-0">
+        <blockquote class="quote-text">
+          “The first sip is joy, the second is gladness, the third is serenity, 
+          the fourth is madness, the fifth is ecstasy.”
+        </blockquote>
+        <p class="quote-author">- Jack Kerouac</p>
+      </div>
+    </div>
+  </div>
+
+<!-- =================== Instaa feed ================ -->
+<section class="container my-5">
+  <div class="text-center mb-4">
+    <h3 class="fw-bold">#GREEN LEAF</h3>
+    <p>
+      Join our virtual CommonTea for daily tea trends, tips and inspiration. <br>
+      Share your tea with us.
+    </p>
+    <button class="btn btn-success">SUBSCRIBE</button>
+  </div>
+
+  <!-- Instagram Feed Grid -->
+  <div class="row g-3">
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="card border-0 shadow-sm">
+        <a href="https://www.instagram.com/p/POST1_ID/" target="_blank">
+          <img src="post1.jpg" class="card-img-top" alt="Instagram post 1">
+        </a>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="card border-0 shadow-sm">
+        <a href="https://www.instagram.com/p/POST2_ID/" target="_blank">
+          <img src="post2.jpg" class="card-img-top" alt="Instagram post 2">
+        </a>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="card border-0 shadow-sm">
+        <a href="https://www.instagram.com/p/POST3_ID/" target="_blank">
+          <img src="post3.jpg" class="card-img-top" alt="Instagram post 3">
+        </a>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="card border-0 shadow-sm">
+        <a href="https://www.instagram.com/p/POST4_ID/" target="_blank">
+          <img src="post4.jpg" class="card-img-top" alt="Instagram post 4">
+        </a>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="card border-0 shadow-sm">
+        <a href="https://www.instagram.com/p/POST5_ID/" target="_blank">
+          <img src="post5.jpg" class="card-img-top" alt="Instagram post 5">
+        </a>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="card border-0 shadow-sm">
+        <a href="https://www.instagram.com/p/POST6_ID/" target="_blank">
+          <img src="post6.jpg" class="card-img-top" alt="Instagram post 6">
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+</body>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-</body>
+<script>
+  // Example: Replace with Instagram Graph API or a fetch from your backend
+  const posts = [
+    "https://via.placeholder.com/400x400?text=Post+1",
+    "https://via.placeholder.com/400x400?text=Post+2",
+    "https://via.placeholder.com/400x400?text=Post+3",
+    "https://via.placeholder.com/400x400?text=Post+4",
+    "https://via.placeholder.com/400x400?text=Post+5",
+    "https://via.placeholder.com/400x400?text=Post+6"
+  ];
+
+  const feedContainer = document.getElementById("insta-feed");
+
+  posts.forEach(url => {
+    const col = document.createElement("div");
+    col.className = "col-12 col-sm-6 col-md-4";
+    col.innerHTML = `
+      <div class="card border-0 shadow-sm">
+        <img src="${url}" class="card-img-top" alt="Instagram post">
+      </div>
+    `;
+    feedContainer.appendChild(col);
+  });
+</script>
 
 </html>
