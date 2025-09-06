@@ -212,3 +212,69 @@
     .img-fluid {
       border-radius: 12px;
     }
+
+    /* ===================Contact================== */
+    .contact-form {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2rem;
+      border-radius: 10px;
+      backdrop-filter: blur(6px);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .contact-form h2 {
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      background: transparent;
+      border: 1px solid #ddd;
+      color: white;
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: #ddd;
+    }
+
+    .btn-submit {
+      background-color: #064d1f;
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+
+    .btn-submit:hover {
+      background-color: #043d18;
+    }
+    section.contact {
+      background: url('../images/contact.webp') no-repeat center center/cover;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+  .bg-dark-green {
+    background-color: #064d1f; /* deep green */
+  }
+  footer p {
+    margin: 0;
+    color: #d1f2d3; /* lighter greenish text */
+  }
+  footer h3, footer h5 {
+    color: #fff;
+  }
+  footer a {
+    color: #a9f2a7;
+    transition: color 0.3s;
+  }
+  footer a:hover {
+    color: #fff;
+  }
