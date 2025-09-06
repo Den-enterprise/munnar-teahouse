@@ -68,6 +68,10 @@
       font-size: 4rem;
     }
 
+    .card-body{
+      background: #bef5b1 !important;
+    }
+
     .hero p {
       font-size: 1.2rem;
       letter-spacing: 1px;
@@ -187,11 +191,11 @@
 }
 /* =========================Quote Section========================= */ 
     .quote-section {
-      background-color: #c9aa97; /* beige-like background */
+      background-color: #82af5f; /* beige-like background */
       padding: 3rem 1rem;
     }
     .quote-card {
-      background-color: #c9aa97;
+      background-color: #82af5f;
       border-radius: 12px;
       overflow: hidden;
     }
