@@ -37,7 +37,7 @@
     /*========HERO SECTION==============*/
 
     .hero {
-      background: url('../images/hero banner.jpg') no-repeat center center/cover;
+      background: url('../images/hero banner.webp') no-repeat center center/cover;
       height: 100vh;
       color: white;
       display: flex;
