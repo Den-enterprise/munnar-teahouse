@@ -69,7 +69,7 @@
     }
 
     .card-body{
-      background: #bef5b1 !important;
+      background: #ffffff !important;
     }
 
     .hero p {
@@ -138,6 +138,12 @@
 
   .product-card img {
     object-fit: cover;
+    height: 200px;
+    width: 100%;
+  }
+
+  .product-cardy img {
+    object-fit: cover;
     height: 300px;
     width: 100%;
   }
@@ -147,6 +153,9 @@
       height: 250px;
     }
   }
+
+
+  
 /* ================= Benefits ============= */
   .circle-img-wrapper {
     max-width: 450px;
