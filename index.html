@@ -33,8 +33,6 @@
       </div>
     </div>
   </nav>
-
-
   <!-- ========= HERO SECTION ============= -->
   <section class="hero">
     <div class="hero-overlay"></div>
@@ -80,7 +78,7 @@ Every sip and spice tells a story of flavor and wellness.
 
       <div class="row g-4 justify-content-center">
         <!-- Product 1 -->
-        <div class="col-md-4 col-sm-6" data-aos="zoom-in">
+        <div class="col-md-4 col-sm-2" data-aos="zoom-in">
           <div class="product-cardy shadow-sm rounded-4 h-100">
             <img src="images/featured1.webp" class="img-fluid rounded-top-4" alt="Product 1">
             <div class="p-3">
@@ -93,7 +91,7 @@ Every sip and spice tells a story of flavor and wellness.
         </div>
 
         <!-- Repeat for Product 2 -->
-        <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="100">
+        <div class="col-md-4 col-sm-2" data-aos="zoom-in" data-aos-delay="100">
           <div class="product-cardy shadow-sm rounded-4 h-100">
             <img src="images/featured2.webp" class="img-fluid rounded-top-4" alt="Product 2">
             <div class="p-3">
@@ -106,7 +104,7 @@ Every sip and spice tells a story of flavor and wellness.
         </div>
 
         <!-- Product 3 with overlay text -->
-        <div class="col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="100">
+        <div class="col-md-4 col-sm-2" data-aos="zoom-in" data-aos-delay="100">
           <div class="product-cardy shadow-sm rounded-4 h-100">
             <img src="images/featured3.webp" class="img-fluid rounded-top-4" alt="Product 2">
             <div class="p-3">
@@ -462,56 +460,58 @@ Every sip and spice tells a story of flavor and wellness.
 
 
   <!-- Instagram Feed Grid -->
-
+<div style="text-align: center;">
+  <img src="images/insta.webp" style="width: 25%; height: 25%;" class="card-img-top" alt="Instagram post 1">
+</div>
 <section class="container my-5">
 
 
   <!-- Instagram Feed Grid -->
   <div class="row g-3">
-    <div class="col-12 col-sm-6 col-md-4">
+    <div class="col-12 col-sm-2 col-md-4">
       <div class="card border-0 shadow-sm">
         <a href="https://www.instagram.com/p/C-UejMdS53Q/" target="_blank">
-          <img src="images\instaposts\1.jpg" class="card-img-top" alt="Instagram post 1">
+          <img src="images\instaposts\1.webp" class="card-img-top" alt="Instagram post 1">
         </a>
       </div>
     </div>
 
-    <div class="col-12 col-sm-6 col-md-4">
+    <div class="col-12 col-sm-2 col-md-4">
       <div class="card border-0 shadow-sm">
         <a href="https://www.instagram.com/p/C-JwMyEyqR2/" target="_blank">
-          <img src="images\instaposts\2.jpg" class="card-img-top" alt="Instagram post 2">
+          <img src="images\instaposts\2.webp" class="card-img-top" alt="Instagram post 2">
         </a>
       </div>
     </div>
 
-    <div class="col-12 col-sm-6 col-md-4">
+    <div class="col-12 col-sm-2 col-md-4">
       <div class="card border-0 shadow-sm">
         <a href="https://www.instagram.com/p/C9o9cRDSIXm/" target="_blank">
-          <img src="images\instaposts\3.jpg" class="card-img-top" alt="Instagram post 3">
+          <img src="images\instaposts\3.webp" class="card-img-top" alt="Instagram post 3">
         </a>
       </div>
     </div>
 
-    <div class="col-12 col-sm-6 col-md-4">
+    <div class="col-12 col-sm-2 col-md-4">
       <div class="card border-0 shadow-sm">
         <a href="https://www.instagram.com/p/C9TkdLTvx77/" target="_blank">
-          <img src="images\instaposts\4.jpg" class="card-img-top" alt="Instagram post 4">
+          <img src="images\instaposts\4.webp" class="card-img-top" alt="Instagram post 4">
         </a>
       </div>
     </div>
 
-    <div class="col-12 col-sm-6 col-md-4">
+    <div class="col-12 col-sm-2 col-md-4">
       <div class="card border-0 shadow-sm">
         <a href="https://www.instagram.com/p/C9RGxSXymBO/" target="_blank">
-          <img src="images\instaposts\5.jpg" class="card-img-top" alt="Instagram post 5">
+          <img src="images\instaposts\5.webp" class="card-img-top" alt="Instagram post 5">
         </a>
       </div>
     </div>
 
-    <div class="col-12 col-sm-6 col-md-4">
+    <div class="col-12 col-sm-2 col-md-4">
       <div class="card border-0 shadow-sm">
         <a href="https://www.instagram.com/p/C9OY44OS2sY/" target="_blank">
-          <img src="images\instaposts\6.jpg" class="card-img-top" alt="Instagram post 6">
+          <img src="images\instaposts\6.webp" class="card-img-top" alt="Instagram post 6">
         </a>
       </div>
     </div>
@@ -614,7 +614,7 @@ Every sip and spice tells a story of flavor and wellness.
 
   posts.forEach(url => {
     const col = document.createElement("div");
-    col.className = "col-12 col-sm-6 col-md-3";
+    col.className = "col-12 col-sm-2 col-md-3";
     col.innerHTML = `
       <div class="card border-0 shadow-sm">
         <img src="${url}" class="card-img-top" alt="Instagram post">
