@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Munnar Tea House - Where The Fresh Tea Originate</title>
   <!-- Bootstrap CSS -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans&display=swap" rel="stylesheet">
@@ -27,26 +28,26 @@
       <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item me-5"><a class="nav-link text-dark" href="#">Home</a></li>
-          <li class="nav-item me-5"><a class="nav-link text-dark" href="#">About Us</a></li>
-          <li class="nav-item"><a class="nav-link text-dark" href="#">Our Products</a></li>
+          <li class="nav-item me-5"><a class="nav-link text-dark" href="#AboutUs">About Us</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="our-products.html">Our Products</a></li>
         </ul>
       </div>
     </div>
   </nav>
   <!-- ========= HERO SECTION ============= -->
-  <section class="hero">
+  <section class="hero" id="home">
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1>Munnar Tea House</h1>
       <p>The authentic taste of the Western Ghats</p>
-      <a href="#" class="btn btn-shop">Shop Now <img src="images\swiggy.svg" style="width: 25px;"/></a>
+      <a href="#" class="btn btn-shop">Shop Now <img src="images\whatsapp.ico" style="width: 25px;"/></a>
     </div>
   </section>
 
 
 
 <!-- ======== ABOUT US ============= -->
-  <section class="about-us-section py-5">
+  <section class="about-us-section py-5" id="AboutUs">
     <div class="container text-center" data-aos="fade-up">
       <h2 class="about-heading mb-4">About us</h2>
       <p class="about-text mb-5 px-md-5">
@@ -59,13 +60,13 @@ What makes us special goes beyond flavor—our brand is built on compassion. Wit
 At Munnar Tea House and Spicefulness, we don’t just deliver taste—we deliver a story of tradition, quality, and kindness.
 
       </p>
-      <img src="images/About Us.jpg" alt="About Us Image" class="img-fluid rounded-4 shadow-sm" style="max-width: 100%;">
+      <img src="images/About Us.webp" alt="About Us Image" class="img-fluid rounded-4 shadow-sm" style="max-width: 100%;">
     </div>
   </section>
 
 
 <!-- ========================PRODUCT FEATUREDD======================== -->
-  <section class="featured-products py-5">
+  <section class="featured-products py-5" id="Ourproducts">
     <div class="container">
       <div class="text-center mb-5" data-aos="fade-up">
         <h2 class="section-title">Featured Products</h2>
@@ -193,7 +194,7 @@ Every sip and spice tells a story of flavor and wellness.
   </section>
   <!-- ================== Products Listing ==================================== -->
   <!-- Product Section -->
-  <section class="py-5">
+  <section class="py-4">
     <div class="container">
 
       <!-- Product Grid -->
@@ -452,9 +453,49 @@ Every sip and spice tells a story of flavor and wellness.
             </div>
           </div>
         </div>
+            <!-- Show All Products Button -->
+          <div class="text-center mt-4">
+            <a href="our-products.html" id="showAllBtn" class="btn btn-outline-success d-none">
+             Show All Products
+      </a>
+    </div>
       </div>
     </div>
   </section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const productGrid = document.getElementById("productGrid");
+  const cards = Array.from(productGrid.getElementsByClassName("product-card"));
+  const showAllBtn = document.getElementById("showAllBtn");
+
+  function updateView() {
+    if (window.innerWidth <= 767) {
+      // Mobile view: show only first 4
+      cards.forEach((card, i) => {
+        card.style.display = i < 4 ? "block" : "none";
+      });
+      showAllBtn.classList.remove("d-none");
+    } else {
+      // Desktop view: show all
+      cards.forEach(card => card.style.display = "");
+      showAllBtn.classList.add("d-none");
+    }
+  }
+
+  updateView();
+  window.addEventListener("resize", updateView);
+});
+</script>
+
+<style>
+  @media (max-width: 767px) {
+    .product-card {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+</style>
 
 
 
@@ -463,7 +504,7 @@ Every sip and spice tells a story of flavor and wellness.
 <div style="text-align: center;">
   <img src="images/insta.webp" style="width: 25%; height: 25%;" class="card-img-top" alt="Instagram post 1">
 </div>
-<section class="container my-5">
+<section class="container my-0">
 
 
   <!-- Instagram Feed Grid -->
@@ -517,6 +558,9 @@ Every sip and spice tells a story of flavor and wellness.
     </div>
   </div>
 </section>
+<br>
+<br>
+
 
 <!-- -------------Contact-------------- -->
 
