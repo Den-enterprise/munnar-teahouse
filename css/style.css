@@ -143,18 +143,169 @@
     width: 100%;
   }
 
+  .product-card {
+  /* This is the key for a smooth animation */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  /* Optional: Keep the card in its layer to prevent rendering glitches */
+  will-change: transform;
+}
+
+
+/* 2. Apply the 'zoom' effect on hover */
+.product-card:hover {
+  /* Increases the size by 5% (1.05) */
+  transform: scale(1.05);
+
+  /* Optional: Add a subtle shadow for a 'lifted' effect */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+  /* Optional: Adjust z-index to ensure the hovered card is on top of neighbors */
+  z-index: 10;
+}
+
   .product-cardy img {
     object-fit: cover;
     height: 300px;
     width: 100%;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 600px) {
     .product-card img {
       height: 250px;
     }
   }
 
+
+/* --- 1. Style the main container for the heading and bar --- */
+.category-header {
+    /* Use Flexbox to put the H2 and the bar next to each other */
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px; /* Space above the product grid */
+    padding-top: 20px;   /* Space above this section */
+}
+
+/* --- 2. Style the aesthetic title (H2) --- */
+.category-header h2 {
+    /* Set font/color for the aesthetic look */
+    font-family: 'Georgia', serif; /* Use a nice font */
+    font-size: 2em;
+    color: #333;
+    padding-right: 20px; /* Space between the text and the line */
+    white-space: nowrap; /* Prevents the title from wrapping */
+}
+
+/* --- 3. Style the "dim bar" (The Divider) --- */
+.divider-bar {
+    /* Take up the remaining width of the row */
+    flex-grow: 1;
+    height: 1px; /* The thickness of the line */
+    /* The "dim" color */
+    background-color: #ccc;
+    opacity: 0.6; /* Make it subtle or "dim" */
+}
+
+/* --- 4. Style the product layout (Product Grid) --- */
+.product-grid {
+    display: grid;
+    /* Create a responsive grid with 3-4 columns */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px; /* Space between products */
+    padding-bottom: 40px;
+}
+
+/* --- Desktop/Base Styles (VISIBLE on large screens) --- */
+/* ==================================== */
+/* 1. DESKTOP / BASE STYLES (Default - for screens > 1024px) */
+/* ==================================== */
+
+.category-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px; 
+    padding-top: 20px;
+}
+
+/* Aesthetic Title Styling */
+.category-header h2 {
+    font-family: 'Georgia', serif; 
+    font-size: 2em;
+    color: #333;
+    padding-right: 20px;
+    white-space: nowrap; 
+}
+
+/* Aesthetic Divider Bar Styling */
+.divider-bar {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #ccc;
+    opacity: 0.6;
+    /* The bar is visible by default */
+    display: block; 
+}
+
+/* Product Grid for large screens (looks like 6 columns in your image) */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6 columns on desktop */
+    gap: 20px;
+    padding-bottom: 40px;
+}
+
+
+/* ==================================== */
+/* 2. TABLET / MEDIUM SCREENS (Up to 1024px) - THE FIX! */
+/* ==================================== */
+@media (max-width: 600px) {
+    
+    /* 1. Hide the decorative bar on tablets */
+    .divider-bar {
+        display: none;
+    }
+
+    /* 2. Adjust the header container (H2 will now take full width) */
+    .category-header {
+        display: block; /* Switch back to block flow */
+        text-align: left; /* Keep title aligned to the left */
+        padding-top: 15px; /* Slightly less vertical space */
+    }
+
+    /* 3. Adjust the title for medium screens */
+    .category-header h2 {
+        font-size: 1.6em; /* Slightly smaller title */
+        padding-right: 0; /* Remove the space that was for the bar */
+        margin-bottom: 15px;
+    }
+    
+    /* 4. Switch the product grid to 3 or 4 columns */
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr); /* 4 columns for a cleaner tablet view */
+        gap: 15px;
+    }
+}
+
+
+/* ==================================== */
+/* 3. MOBILE / SMALL SCREENS (Up to 600px) - Your "Show All" view */
+/* ==================================== */
+@media (max-width: 600px) {
+    
+    /* HIDE THE ENTIRE DIVISION HEADER on mobile */
+    .category-header {
+        display: none; 
+    }
+    
+    /* Display products in a single column to match a mobile list */
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding-bottom: 15px; 
+    }
+    
+    /* NOTE: You must also ensure your platform or script is only 
+       displaying the first 4 products in this .product-grid on mobile. */
+}
 
   
 /* ================= Benefits ============= */
@@ -185,7 +336,7 @@
     padding: 60px 0;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 600px) {
     .our-products-hero {
       height: 250px;
       padding: 40px 0;
@@ -210,14 +361,23 @@
       overflow: hidden;
     }
     .quote-text {
-      font-size: 1.25rem;
+      font-size: 1.1rem;
+      font : Open Sans, sans-serif;
       font-weight: 300;
       color: white;
+      text-align :center;
     }
     .quote-author {
       margin-top: 1rem;
       font-size: 1rem;
       color: white;
+    }
+
+    .h1{
+      color: white;
+      font-weight: 700;
+      font-family: 'Playfair Display', serif;
+      text-align :center;
     }
     .img-fluid {
       border-radius: 12px;
@@ -288,3 +448,52 @@
   footer a:hover {
     color: #fff;
   }
+
+
+/* quick view modal */
+
+#quickViewLabel {
+  color: #212529; /* Bootstrap’s default dark text */
+}
+.quickviewquantity {
+  width: 80px;
+  text-align: center;
+  color: #212529;
+}
+
+/* Targeting the specific label in the quick view modal */
+#quickViewModal label[for="quickViewQuantity"] {
+    /* Use a very dark color for high contrast */
+    color: #333333 !important; 
+    /* Optional: Increase weight slightly */
+    font-weight: 500; 
+}
+
+/* Target the close button within the modal header */
+/* Target the specific close button in your quick view modal */
+#quickViewModal .modal-header .close {
+    /* Ensure it has a position (relative/absolute/fixed) to respect z-index */
+    position: relative; 
+    
+    /* Set a ridiculously high z-index to ensure it is on top of everything */
+    z-index: 9999999999999999999999999999999999; 
+    
+    /* Make sure the clickable area is large */
+    padding: 1rem; 
+    margin: -1rem;
+    
+    /* Ensure cursor feedback is present */
+    cursor: pointer;
+}
+
+/* Smooth modal animation */
+.modal.fade .modal-dialog {
+  transform: translateY(-30px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.modal.show .modal-dialog {
+  transform: translateY(0);
+  opacity: 1;
+}
