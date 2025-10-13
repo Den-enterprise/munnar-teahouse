@@ -13,6 +13,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <!-- Javascript Files -->
   <script src="scripts/script.js"></script>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+<!-- Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Bootstrap 4 JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
   <!-- style sheet-->
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
@@ -72,27 +81,27 @@ At Munnar Tea House and Spicefulness, we don’t just deliver taste—we deliver
         <h2 class="section-title">Featured Products</h2>
         <p class="section-subtitle px-md-5">
           Handpicked from the Western Ghats, blending tradition, purity, and care.<br>
-Every sip and spice tells a story of flavor and wellness.
+          Every sip and spice tells a story of flavor and wellness.
 
         </p>
       </div>
 
-      <div class="row g-4 justify-content-center">
+      <div class="row g-4 justify-content-center id="featuredProducts">
         <!-- Product 1 -->
-        <div class="col-md-4 col-sm-2" data-aos="zoom-in">
+        <div class="col-md-4 col-sm-5" data-aos="zoom-in">
           <div class="product-cardy shadow-sm rounded-4 h-100">
             <img src="images/featured1.webp" class="img-fluid rounded-top-4" alt="Product 1">
             <div class="p-3">
               <h5 class="fw-semibold mb-1">BOP Tea - Whole Leaf</h5>
               <p class="text-muted small mb-1">Tea Powder</p>
-              <!-- <p class="mb-1 text-warning small">★★★★★ <span class="text-muted">4.9</span></p> -->
+              <p class="mb-1 text-warning small">★★★★★ <span class="text-muted">4.9</span></p>
               <p class="fw-bold mb-0">₹246 <span class="text-muted fw-normal">/pack</span></p>
             </div>
           </div>
         </div>
 
         <!-- Repeat for Product 2 -->
-        <div class="col-md-4 col-sm-2" data-aos="zoom-in" data-aos-delay="100">
+        <div class="col-md-4 col-sm-5 id="featured-products" data-aos="zoom-in" data-aos-delay="100">
           <div class="product-cardy shadow-sm rounded-4 h-100">
             <img src="images/featured2.webp" class="img-fluid rounded-top-4" alt="Product 2">
             <div class="p-3">
@@ -105,7 +114,7 @@ Every sip and spice tells a story of flavor and wellness.
         </div>
 
         <!-- Product 3 with overlay text -->
-        <div class="col-md-4 col-sm-2" data-aos="zoom-in" data-aos-delay="100">
+        <div class="col-md-4 col-sm-5" data-aos="zoom-in" data-aos-delay="100">
           <div class="product-cardy shadow-sm rounded-4 h-100">
             <img src="images/featured3.webp" class="img-fluid rounded-top-4" alt="Product 2">
             <div class="p-3">
@@ -176,11 +185,19 @@ Every sip and spice tells a story of flavor and wellness.
       
       <!-- Right: Quote -->
       <div class="col-md-6 text-center text-md-start mt-4 mt-md-0">
+        <h1 class="h1"> Benefits</h1> <br>
         <blockquote class="quote-text">
-          “The first sip is joy, the second is gladness, the third is serenity, 
-          the fourth is madness, the fifth is ecstasy.”
+        Rich in Antioxidants – Helps fight free radicals, supporting overall health.<br><br>
+
+        Boosts Energy – Its strong, brisk flavor comes with natural caffeine for alertness.<br><br>
+
+        Supports Digestion – A warm cup can aid metabolism and digestive comfort.<br><br>
+
+        Heart Health – Regular consumption may help improve blood circulation.<br><br>
+
+        Immune Support – Strengthens the body’s natural defense system.<br><br>
+
         </blockquote>
-        <p class="quote-author">- Jack Kerouac</p>
       </div>
     </div>
   </div>
@@ -188,7 +205,7 @@ Every sip and spice tells a story of flavor and wellness.
 <!--================== Our Product Banner ======================= -->
   <section class="our-products-hero text-center text-white d-flex align-items-center">
     <div class="container">
-      <h2 class="display-5 fw-semibold mb-2">Our products to Explore Our Collections</h2>
+      <h2 class="display-5 fw-semibold mb-2">Our Products</h2>
       <p class="lead">Handpicked flavors, packed with care and tradition</p>
     </div>
   </section>
@@ -196,12 +213,21 @@ Every sip and spice tells a story of flavor and wellness.
   <!-- Product Section -->
   <section class="py-4">
     <div class="container">
+      <main class="shop-page-container">
 
+    <section class="product-division">
+        <div class="category-header">
+            <h2>Tea</h2>
+            <div class="divider-bar"></div>
+        </div>
+        <div class="product-grid">
+            </div>
+    </section>
       <!-- Product Grid -->
       <div class="row g-4" id="productGrid">
 
         <!-- Product Card: Spicefullness -->
-        <div class="col-md-2 product-card" data-category="spicefullness">
+        <div class="col-md-2 col-xs-6 col-sm-3 product-card" data-category="spicefullness">
           <div class="card h-100 shadow-sm border-0">
             <img src="images\products\1.webp" class="card-img-top" alt="Spicefullness">
             <div class="card-body text-center">
@@ -209,20 +235,94 @@ Every sip and spice tells a story of flavor and wellness.
               <p class="text-muted small">Tea Powder</p>
               <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
               <p class="fw-semibold">₹246 <span class="text-muted">/ pack</span></p>
-              <a href="https://munnar-tea-house.mini.site/products/4b33fc9c-ff1b-45ee-a894-04063650da00?slug=munnar-tea-house"><button class="btn btn-success btn-sm">Buy</button></a>
+              <a href="https://munnar-tea-house.mini.site/products/4b33fc9c-ff1b-45ee-a894-04063650da00?slug=munnar-tea-house"><button class="btn btn-success btn-sm">Add to cart</button></a>
             </div>
           </div>
         </div>
+
+                <div class="col-md-2 col-xs-6 col-sm-3 product-card" data-category="spicefullness">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="images\products\8.webp" class="card-img-top" alt="Spicefullness">
+            <div class="card-body text-center">
+              <h5 class="card-title">Masala Tea</h5>
+              <p class="text-muted small">Matcha Tea Powder</p>
+              <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
+              <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
+              <button class="btn btn-success btn-sm">Add to cart</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-2 col-xs-6 col-sm-3 product-card" data-category="spicefullness">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="images\products\9.webp" class="card-img-top" alt="Spicefullness">
+            <div class="card-body text-center">
+              <h5 class="card-title">Ginger Tea</h5>
+              <p class="text-muted small">Matcha Tea Powder</p>
+              <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
+              <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
+              <button class="btn btn-success btn-sm">Add to cart</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-2 col-xs-6 col-sm-3 product-card" data-category="spicefullness">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="images\products\10.webp" class="card-img-top" alt="Spicefullness">
+            <div class="card-body text-center">
+              <h5 class="card-title">Cinnamon Tea</h5>
+              <p class="text-muted small">Matcha Tea Powder</p>
+              <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
+              <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
+              <button class="btn btn-success btn-sm">Add to cart</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-2 col-xs-6 col-sm-3 product-card" data-category="spicefullness">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="images\products\11.webp" class="card-img-top" alt="Spicefullness">
+            <div class="card-body text-center">
+              <h5 class="card-title">Cardamom Tea</h5>
+              <p class="text-muted small">Matcha Tea Powder</p>
+              <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
+              <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
+              <button class="btn btn-success btn-sm">Add to cart</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-2 col-xs-6 col-sm-3 product-card" data-category="spicefullness">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="images\products\12.webp" class="card-img-top" alt="Spicefullness">
+            <div class="card-body text-center">
+              <h5 class="card-title">Chocolate Tea</h5>
+              <p class="text-muted small">Matcha Tea Powder</p>
+              <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
+              <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
+              <button class="btn btn-success btn-sm">Add to cart</button>
+            </div>
+          </div>
+        </div>
+
+            <section class="product-division">
+        <div class="category-header">
+            <h2>Spices</h2>
+            <div class="divider-bar"></div>
+        </div>
+        <div class="product-grid">
+            </div>
+    </section>
 
         <div class="col-md-2 product-card" data-category="spicefullness">
           <div class="card h-100 shadow-sm border-0">
             <img src="images\products\2.webp" class="card-img-top" alt="Spicefullness">
             <div class="card-body text-center">
-              <h5 class="card-title">Organic Ceremonial Matcha</h5>
+              <h5 class="card-title">Kuzhumuzhagu</h5>
               <p class="text-muted small">Matcha Tea Powder</p>
               <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
               <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
-              <button class="btn btn-success btn-sm">Buy</button>
+              <button class="btn btn-success btn-sm">Add to cart</button>
             </div>
           </div>
         </div>
@@ -231,11 +331,11 @@ Every sip and spice tells a story of flavor and wellness.
           <div class="card h-100 shadow-sm border-0">
             <img src="images\products\3.webp" class="card-img-top" alt="Spicefullness">
             <div class="card-body text-center">
-              <h5 class="card-title">Organic Ceremonial Matcha</h5>
+              <h5 class="card-title">Elakkai</h5>
               <p class="text-muted small">Matcha Tea Powder</p>
               <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
               <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
-              <button class="btn btn-success btn-sm">Buy</button>
+              <button class="btn btn-success btn-sm">Add to cart</button>
             </div>
           </div>
         </div>
@@ -244,129 +344,11 @@ Every sip and spice tells a story of flavor and wellness.
           <div class="card h-100 shadow-sm border-0">
             <img src="images\products\4.webp" class="card-img-top" alt="Spicefullness">
             <div class="card-body text-center">
-              <h5 class="card-title">Organic Ceremonial Matcha</h5>
+              <h5 class="card-title">Cloves</h5>
               <p class="text-muted small">Matcha Tea Powder</p>
               <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
               <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
-              <button class="btn btn-success btn-sm">Buy</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-2 product-card" data-category="spicefullness">
-          <div class="card h-100 shadow-sm border-0">
-            <img src="images\products\5.webp" class="card-img-top" alt="Spicefullness">
-            <div class="card-body text-center">
-              <h5 class="card-title">Organic Ceremonial Matcha</h5>
-              <p class="text-muted small">Matcha Tea Powder</p>
-              <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
-              <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
-              <button class="btn btn-success btn-sm">Buy</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-2 product-card" data-category="spicefullness">
-          <div class="card h-100 shadow-sm border-0">
-            <img src="images\products\6.webp" class="card-img-top" alt="Spicefullness">
-            <div class="card-body text-center">
-              <h5 class="card-title">Organic Ceremonial Matcha</h5>
-              <p class="text-muted small">Matcha Tea Powder</p>
-              <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
-              <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
-              <button class="btn btn-success btn-sm">Buy</button>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="col-md-2 product-card" data-category="spicefullness">
-          <div class="card h-100 shadow-sm border-0">
-            <img src="images\products\7.webp" class="card-img-top" alt="Spicefullness">
-            <div class="card-body text-center">
-              <h5 class="card-title">Organic Ceremonial Matcha</h5>
-              <p class="text-muted small">Matcha Tea Powder</p>
-              <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
-              <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
-              <button class="btn btn-success btn-sm">Buy</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-2 product-card" data-category="spicefullness">
-          <div class="card h-100 shadow-sm border-0">
-            <img src="images\products\8.webp" class="card-img-top" alt="Spicefullness">
-            <div class="card-body text-center">
-              <h5 class="card-title">Organic Ceremonial Matcha</h5>
-              <p class="text-muted small">Matcha Tea Powder</p>
-              <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
-              <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
-              <button class="btn btn-success btn-sm">Buy</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-2 product-card" data-category="spicefullness">
-          <div class="card h-100 shadow-sm border-0">
-            <img src="images\products\9.webp" class="card-img-top" alt="Spicefullness">
-            <div class="card-body text-center">
-              <h5 class="card-title">Organic Ceremonial Matcha</h5>
-              <p class="text-muted small">Matcha Tea Powder</p>
-              <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
-              <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
-              <button class="btn btn-success btn-sm">Buy</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-2 product-card" data-category="spicefullness">
-          <div class="card h-100 shadow-sm border-0">
-            <img src="images\products\10.webp" class="card-img-top" alt="Spicefullness">
-            <div class="card-body text-center">
-              <h5 class="card-title">Organic Ceremonial Matcha</h5>
-              <p class="text-muted small">Matcha Tea Powder</p>
-              <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
-              <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
-              <button class="btn btn-success btn-sm">Buy</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-2 product-card" data-category="spicefullness">
-          <div class="card h-100 shadow-sm border-0">
-            <img src="images\products\11.webp" class="card-img-top" alt="Spicefullness">
-            <div class="card-body text-center">
-              <h5 class="card-title">Organic Ceremonial Matcha</h5>
-              <p class="text-muted small">Matcha Tea Powder</p>
-              <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
-              <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
-              <button class="btn btn-success btn-sm">Buy</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-2 product-card" data-category="spicefullness">
-          <div class="card h-100 shadow-sm border-0">
-            <img src="images\products\12.webp" class="card-img-top" alt="Spicefullness">
-            <div class="card-body text-center">
-              <h5 class="card-title">Organic Ceremonial Matcha</h5>
-              <p class="text-muted small">Matcha Tea Powder</p>
-              <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
-              <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
-              <button class="btn btn-success btn-sm">Buy</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-2 product-card" data-category="spicefullness">
-          <div class="card h-100 shadow-sm border-0">
-            <img src="images\products\13.webp" class="card-img-top" alt="Spicefullness">
-            <div class="card-body text-center">
-              <h5 class="card-title">Organic Ceremonial Matcha</h5>
-              <p class="text-muted small">Matcha Tea Powder</p>
-              <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
-              <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
-              <button class="btn btn-success btn-sm">Buy</button>
+              <button class="btn btn-success btn-sm">Add to cart</button>
             </div>
           </div>
         </div>
@@ -375,41 +357,115 @@ Every sip and spice tells a story of flavor and wellness.
           <div class="card h-100 shadow-sm border-0">
             <img src="images\products\14.webp" class="card-img-top" alt="Spicefullness">
             <div class="card-body text-center">
-              <h5 class="card-title">Organic Ceremonial Matcha</h5>
+              <h5 class="card-title">Kudampuli</h5>
               <p class="text-muted small">Matcha Tea Powder</p>
               <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
               <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
-              <button class="btn btn-success btn-sm">Buy</button>
+              <button class="btn btn-success btn-sm">Add to cart</button>
             </div>
           </div>
         </div>
 
         <div class="col-md-2 product-card" data-category="spicefullness">
           <div class="card h-100 shadow-sm border-0">
-            <img src="images\products\15.webp" class="card-img-top" alt="Spicefullness">
+            <img src="images\products\13.webp" class="card-img-top" alt="Spicefullness">
             <div class="card-body text-center">
-              <h5 class="card-title">Organic Ceremonial Matcha</h5>
+              <h5 class="card-title">Cinnamon sticks</h5>
               <p class="text-muted small">Matcha Tea Powder</p>
               <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
               <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
-              <button class="btn btn-success btn-sm">Buy</button>
+              <button class="btn btn-success btn-sm">Add to cart</button>
+            </div>
+          </div>
+        </div>
+
+            <section class="product-division">
+        <div class="category-header">
+            <h2>Nuts</h2>
+            <div class="divider-bar"></div>
+        </div>
+        <div class="product-grid">
+            </div>
+    </section>
+
+        <div class="col-md-2 product-card" data-category="spicefullness">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="images\products\6.webp" class="card-img-top" alt="Spicefullness">
+            <div class="card-body text-center">
+              <h5 class="card-title">Almonds</h5>
+              <p class="text-muted small">Matcha Tea Powder</p>
+              <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
+              <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
+              <button class="btn btn-success btn-sm">Add to cart</button>
+            </div>
+          </div>
+        </div>
+
+        
+
+
+        <div class="col-md-2 product-card" data-category="spicefullness">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="images\products\7.webp" class="card-img-top" alt="Spicefullness">
+            <div class="card-body text-center">
+              <h5 class="card-title">Dates</h5>
+              <p class="text-muted small">Matcha Tea Powder</p>
+              <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
+              <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
+              <button class="btn btn-success btn-sm">Add to cart</button>
             </div>
           </div>
         </div>
 
 
+        <div class="col-md-2 product-card" data-category="spicefullness">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="images\products\5.webp" class="card-img-top" alt="Spicefullness">
+            <div class="card-body text-center">
+              <h5 class="card-title">Cashew</h5>
+              <p class="text-muted small">Matcha Tea Powder</p>
+              <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
+              <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
+              <button class="btn btn-success btn-sm">Add to cart</button>
+            </div>
+          </div>
+        </div>
 
+ 
+
+        <div class="col-md-2 product-card" data-category="spicefullness">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="images\products\15.webp" class="card-img-top" alt="Spicefullness">
+            <div class="card-body text-center">
+              <h5 class="card-title">Badam</h5>
+              <p class="text-muted small">Matcha Tea Powder</p>
+              <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
+              <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
+              <button class="btn btn-success btn-sm">Add to cart</button>
+            </div>
+          </div>
+        </div>
+
+
+    <section class="product-division">
+        <div class="category-header">
+            <h2>Other Savouries</h2>
+            <div class="divider-bar"></div>
+        </div>
+        <div class="product-grid">
+            </div>
+    </section>
 
         <!-- Product Card: Ripple -->
         <div class="col-md-2 product-card" data-category="ripple">
           <div class="card h-100 shadow-sm border-0">
             <img src="images\products\16.webp" class="card-img-top" alt="Ripple">
             <div class="card-body text-center">
-              <h5 class="card-title">Sencha Powder</h5>
+              <h5 class="card-title">Lemongrass oil</h5>
               <p class="text-muted small">Green Tea Powder</p>
               <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
               <p class="fw-semibold">₹1,311 <span class="text-muted">/ kg</span></p>
-              <button class="btn btn-success btn-sm">Buy</button>
+              <button class="btn btn-success btn-sm">Add to cart</button>
             </div>
           </div>
         </div>
@@ -419,37 +475,25 @@ Every sip and spice tells a story of flavor and wellness.
           <div class="card h-100 shadow-sm border-0">
             <img src="images\products\17.webp" class="card-img-top" alt="Spicefullness">
             <div class="card-body text-center">
-              <h5 class="card-title">Darjeeling Black Tea</h5>
+              <h5 class="card-title">Achaar</h5>
               <p class="text-muted small">Black Tea Powder</p>
               <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
               <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
-              <button class="btn btn-success btn-sm">Buy</button>
+              <button class="btn btn-success btn-sm">Add to cart</button>
             </div>
           </div>
         </div>
 
-        <div class="col-md-2 product-card" data-category="spicefullness">
-          <div class="card h-100 shadow-sm border-0">
-            <img src="images\products\18.webp" class="card-img-top" alt="Spicefullness">
-            <div class="card-body text-center">
-              <h5 class="card-title">Organic Ceremonial Matcha</h5>
-              <p class="text-muted small">Matcha Tea Powder</p>
-              <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
-              <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
-              <button class="btn btn-success btn-sm">Buy</button>
-            </div>
-          </div>
-        </div>
 
         <div class="col-md-2 product-card" data-category="spicefullness">
           <div class="card h-100 shadow-sm border-0">
             <img src="images\products\19.webp" class="card-img-top" alt="Spicefullness">
             <div class="card-body text-center">
-              <h5 class="card-title">Organic Ceremonial Matcha</h5>
+              <h5 class="card-title">Strawberry preserve</h5>
               <p class="text-muted small">Matcha Tea Powder</p>
               <div class="text-warning mb-2">★★★★☆ <span class="text-muted small">4.5</span></div>
               <p class="fw-semibold">₹2,459 <span class="text-muted">/ kg</span></p>
-              <button class="btn btn-success btn-sm">Buy</button>
+              <button class="btn btn-success btn-sm">Add to cart</button>
             </div>
           </div>
         </div>
@@ -470,7 +514,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const showAllBtn = document.getElementById("showAllBtn");
 
   function updateView() {
-    if (window.innerWidth <= 767) {
+    if (window.innerWidth <= 600) {
       // Mobile view: show only first 4
       cards.forEach((card, i) => {
         card.style.display = i < 4 ? "block" : "none";
@@ -509,7 +553,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   <!-- Instagram Feed Grid -->
   <div class="row g-3">
-    <div class="col-12 col-sm-2 col-md-4">
+    <div class="col-12 col-sm-4 col-md-4">
       <div class="card border-0 shadow-sm">
         <a href="https://www.instagram.com/p/C-UejMdS53Q/" target="_blank">
           <img src="images\instaposts\1.webp" class="card-img-top" alt="Instagram post 1">
@@ -517,7 +561,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
     </div>
 
-    <div class="col-12 col-sm-2 col-md-4">
+    <div class="col-12 col-sm-4 col-md-4">
       <div class="card border-0 shadow-sm">
         <a href="https://www.instagram.com/p/C-JwMyEyqR2/" target="_blank">
           <img src="images\instaposts\2.webp" class="card-img-top" alt="Instagram post 2">
@@ -525,7 +569,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
     </div>
 
-    <div class="col-12 col-sm-2 col-md-4">
+    <div class="col-12 col-sm-4 col-md-4">
       <div class="card border-0 shadow-sm">
         <a href="https://www.instagram.com/p/C9o9cRDSIXm/" target="_blank">
           <img src="images\instaposts\3.webp" class="card-img-top" alt="Instagram post 3">
@@ -533,7 +577,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
     </div>
 
-    <div class="col-12 col-sm-2 col-md-4">
+    <div class="col-12 col-sm-4 col-md-4">
       <div class="card border-0 shadow-sm">
         <a href="https://www.instagram.com/p/C9TkdLTvx77/" target="_blank">
           <img src="images\instaposts\4.webp" class="card-img-top" alt="Instagram post 4">
@@ -541,7 +585,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
     </div>
 
-    <div class="col-12 col-sm-2 col-md-4">
+    <div class="col-12 col-sm-4 col-md-4">
       <div class="card border-0 shadow-sm">
         <a href="https://www.instagram.com/p/C9RGxSXymBO/" target="_blank">
           <img src="images\instaposts\5.webp" class="card-img-top" alt="Instagram post 5">
@@ -549,7 +593,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
     </div>
 
-    <div class="col-12 col-sm-2 col-md-4">
+    <div class="col-12 col-sm-4 col-md-4">
       <div class="card border-0 shadow-sm">
         <a href="https://www.instagram.com/p/C9OY44OS2sY/" target="_blank">
           <img src="images\instaposts\6.webp" class="card-img-top" alt="Instagram post 6">
@@ -623,7 +667,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <a href="#" class="text-light fs-4"><i class="bi bi-google"></i></a>
           <a href="#" class="text-light fs-4"><i class="bi bi-linkedin"></i></a>
           <a href="#" class="text-light fs-4"><i class="bi bi-x"></i></a>
-          <a href="#" class="text-light fs-4"><i class="bi bi-instagram"></i></a>
+          <a href="https://www.instagram.com/munnarteahouse/" class="text-light fs-4"><i class="bi bi-instagram"></i></a>
         </div>
       </div>
     </div>
@@ -636,6 +680,41 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
   </div>
 </footer> -->
+
+
+
+<div class="modal fade" id="quickViewModal" tabindex="-1" role="dialog" aria-labelledby="quickViewLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <h5 class="modal-title font-weight-bold text-dark" id="quickViewLabel">Product Name</h5>
+        <button type="button" class="close" aria-label="Close" **id="quickViewCloseButton"**>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row align-items-center">
+          <div class="col-md-5 text-center mb-3">
+            <img id="quickViewImage" src="" alt="Product Image" class="img-fluid rounded shadow-sm">
+          </div>
+          <div class="col-md-7">
+            <h4 id="quickViewPrice" class="text-success mb-3"></h4>
+            <p id="quickViewDescription" class="text-muted">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at commodo nulla, vel imperdiet nisi.
+            </p>
+            <div class="d-flex align-items-center my-3">
+              <label for="quickViewQuantity" class="mr-2 mb-0 **text-dark**">Quantity:    </label>
+              <input type="number" id="quickViewQuantity" class="form-control w-25" value="1" min="1">
+            </div>
+            <button id="addToCartButton" class="btn btn-success px-4">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 </body>
 
@@ -666,6 +745,103 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
     feedContainer.appendChild(col);
   });
+</script>
+
+<script>
+// ===== QUICK VIEW FUNCTIONALITY =====
+
+// Attach click listeners to every product card
+document.querySelectorAll('.product-card .card').forEach(card => {
+  card.addEventListener('click', function (event) {
+    // Skip opening modal if "Add to Cart" button is clicked
+    if (event.target.closest('button')) return;
+
+    // Get product data
+    const imageEl = this.querySelector('.card-img-top');
+    const nameEl = this.querySelector('.card-title');
+    const priceEl = this.querySelector('.fw-semibold');
+
+    if (!imageEl || !nameEl || !priceEl) {
+      console.error('Quick view: missing expected elements in product card');
+      return;
+    }
+
+    // Fill modal with card info
+    document.getElementById('quickViewImage').src = imageEl.src;
+    document.getElementById('quickViewLabel').innerText = nameEl.textContent.trim();
+    document.getElementById('quickViewPrice').innerText = priceEl.innerText;
+    document.getElementById('quickViewQuantity').value = 1;
+
+    // Display modal
+    $('#quickViewModal').modal('show');
+  });
+});
+
+// ===== ADD TO CART INSIDE MODAL =====
+document.getElementById('addToCartButton').addEventListener('click', () => {
+  const name = document.getElementById('quickViewLabel').innerText;
+  const qty = document.getElementById('quickViewQuantity').value;
+
+  // Example action — replace with your actual cart logic later
+  alert(`${qty} × ${name} added to cart.`);
+
+  // Close modal after adding
+  $('#quickViewModal').modal('hide');
+});
+
+// ===== OPTIONAL: CONSOLE FEEDBACK =====
+console.log('Quick View script initialized — waiting for clicks.');
+
+document.addEventListener('DOMContentLoaded', function() {
+    const closeButton = document.getElementById('quickViewClose');
+    const modalElement = document.getElementById('quickViewModal');
+
+    if (closeButton && modalElement) {
+        closeButton.addEventListener('click', function() {
+            // This uses Bootstrap's native method to hide the modal via JavaScript
+            $(modalElement).modal('hide'); 
+
+            // If you are NOT using jQuery/Bootstrap, use the following:
+            // modalElement.classList.remove('show');
+            // modalElement.style.display = 'none';
+            // document.body.classList.remove('modal-open'); 
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const closeBtn = document.getElementById('quickViewCloseButton');
+    const modal = document.getElementById('quickViewModal');
+
+    if (closeBtn && modal) {
+        closeBtn.addEventListener('click', function(event) {
+            // IMPORTANT: Stop event propagation to prevent the click
+            // from triggering the "close on outside click" logic.
+            event.stopPropagation(); 
+
+            // Use jQuery/Bootstrap's native JS to hide the modal
+            // Assuming you have jQuery loaded (necessary for Bootstrap JS)
+            if (typeof $ !== 'undefined' && $.fn.modal) {
+                $(modal).modal('hide');
+            } else {
+                // Fallback if jQuery/Bootstrap JS is somehow missing/broken
+                modal.classList.remove('show');
+                modal.setAttribute('aria-hidden', 'true');
+                modal.style.display = 'none';
+                document.body.classList.remove('modal-open');
+
+                // Manually remove the backdrop if necessary
+                const backdrop = document.querySelector('.modal-backdrop');
+                if (backdrop) {
+                    backdrop.parentNode.removeChild(backdrop);
+                }
+            }
+        });
+    }
+});
+
+
+
 </script>
 
 </html>
