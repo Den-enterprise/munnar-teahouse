@@ -7,6 +7,14 @@
       font-family: 'Open Sans', sans-serif;
     }
 
+    /* Prevent horizontal overflow and normalize box sizing */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { overflow-x: hidden; }
+
+    /* Ensure media and large elements don't exceed their containers */
+    img, video, iframe { max-width: 100%; height: auto; display: block; }
+    .container, .container-fluid { max-width: 100%; }
+
 
 /*===================== NAV BAR ======================*/
 
@@ -85,11 +93,25 @@
       border-radius: 30px;
       font-weight: 600;
       transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 6px 18px rgba(15,23,42,0.06);
     }
 
     .btn-shop:hover {
       background-color: #fafffb;
       color: #5bcb66;
+    }
+
+    /* Ensure icons inside the pill button stay inline instead of block (global img rule forces display:block) */
+    .btn-shop img {
+      display: inline-block;
+      vertical-align: middle;
+      width: 22px;
+      height: auto;
+      margin-left: 6px;
     }
 
 
@@ -350,6 +372,80 @@
       font-size: 1rem;
     }
 }
+/* ========================= Filters panel ========================= */
+.filter-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.04);
+}
+
+.filter-section .filter-title {
+  font-weight: 600;
+  color: #1f6631;
+  margin-bottom: 8px;
+}
+
+.filter-section .filter-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 4px;
+  border-radius: 8px;
+  transition: background 0.15s ease, transform 0.12s ease;
+}
+
+.filter-section .filter-option:hover {
+  background: rgba(31, 102, 49, 0.04);
+}
+
+.filter-section input[type="checkbox"].category-filter {
+  width: 18px;
+  height: 18px;
+  accent-color: #1f6631; /* modern colored checkbox */
+}
+
+.filter-section .price-inputs {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-section .price-inputs input[type="number"] {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid #e6e6e6;
+}
+
+.filter-section .btn-success {
+  background: linear-gradient(180deg,#2aa76b,#197a43);
+  border: none;
+  box-shadow: 0 6px 12px rgba(25,122,67,0.12);
+}
+
+.filter-section .btn-outline-secondary {
+  border-radius: 8px;
+}
+
+.filter-badge {
+  background: #eef7ee;
+  color: #1f6631;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  margin-right: 6px;
+}
+
+/* Responsive: move filters above products on narrow screens */
+@media (max-width: 991.98px) {
+  .filter-section {
+    margin-bottom: 18px;
+  }
+}
+
+/* Small touch spacing */
+.filter-section .filter-option + .filter-option { margin-top: 6px; }
 /* =========================Quote Section========================= */ 
     .quote-section {
       background-color: #82af5f; /* beige-like background */
