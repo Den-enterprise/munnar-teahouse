@@ -56,6 +56,70 @@
   </section>
   <!-- ================== Products Listing ==================================== -->
   <!-- Product Section -->
+
+<div class="row">
+            <div class="col-md-3">
+                <div class="filter-section">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="mb-0">Filters</h4>
+                        <button id="clearFilters" class="btn btn-sm btn-outline-secondary">Clear All</button>
+                    </div>
+                    
+                    <!-- Category Filter -->
+                    <div class="filter-group">
+                        <div class="filter-title">Category</div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="filter-tea" class="category-filter" value="tea">
+                            <label for="filter-tea">Tea</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="filter-spices" class="category-filter" value="spices">
+                            <label for="filter-spices">Spices</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="filter-nuts" class="category-filter" value="nuts">
+                            <label for="filter-nuts">Nuts</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="filter-other" class="category-filter" value="other">
+                            <label for="filter-other">Other Savouries</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Price Filter -->
+                    <div class="filter-group">
+                        <div class="filter-title">Price Range</div>
+                        <div class="price-inputs mb-2">
+                            <input type="number" id="minPrice" class="form-control form-control-sm" placeholder="Min" min="0">
+                            <input type="number" id="maxPrice" class="form-control form-control-sm" placeholder="Max" min="0">
+                        </div>
+                        <button id="applyPrice" class="btn btn-sm btn-success">Apply Price Filter</button>
+                    </div>
+                    
+                    <!-- Active Filters Display -->
+                    <div id="activeFilters" class="mt-3">
+                        <div class="filter-title">Active Filters</div>
+                        <div id="filterTags" class="d-flex flex-wrap gap-2"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Products Section -->
+            <div class="col-md-9">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <span id="productCount" class="text-muted">Showing all products</span>
+                    </div>
+                    <div>
+                        <select id="sortBy" class="form-select form-select-sm">
+                            <option value="default">Sort by</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="name">Name: A to Z</option>
+                        </select>
+                    </div>
+                </div>
+                
   <section class="py-4">
     <div class="container">
       <main class="shop-page-container">
@@ -342,49 +406,9 @@
             </div>
           </div>
         </div>
-            <!-- Show All Products Button -->
-          <div class="text-center mt-4">
-            <a href="our-products.html" id="showAllBtn" class="btn btn-outline-success d-none">
-             Show All Products
-      </a>
-    </div>
       </div>
     </div>
   </section>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const productGrid = document.getElementById("productGrid");
-  const cards = Array.from(productGrid.getElementsByClassName("product-card"));
-  const showAllBtn = document.getElementById("showAllBtn");
-
-  function updateView() {
-    if (window.innerWidth <= 600) {
-      // Mobile view: show only first 4
-      cards.forEach((card, i) => {
-        card.style.display = i < 4 ? "block" : "none";
-      });
-      showAllBtn.classList.remove("d-none");
-    } else {
-      // Desktop view: show all
-      cards.forEach(card => card.style.display = "");
-      showAllBtn.classList.add("d-none");
-    }
-  }
-
-  updateView();
-  window.addEventListener("resize", updateView);
-});
-</script>
-
-<style>
-  @media (max-width: 767px) {
-    .product-card {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-  }
-</style>
 
 
 <div class="modal fade" id="quickViewModal" tabindex="-1" role="dialog" aria-labelledby="quickViewLabel" aria-hidden="true">
@@ -392,7 +416,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <div class="modal-content">
       <div class="modal-header border-0">
         <h5 class="modal-title font-weight-bold text-dark" id="quickViewLabel">Product Name</h5>
-        <button type="button" class="close" aria-label="Close" **id="quickViewCloseButton"**>
+        <button type="button" class="close" aria-label="Close" id="quickViewClose">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -408,7 +432,7 @@ document.addEventListener("DOMContentLoaded", function () {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at commodo nulla, vel imperdiet nisi.
             </p>
             <div class="d-flex align-items-center my-3">
-              <label for="quickViewQuantity" class="mr-2 mb-0 **text-dark**">Quantity:    </label>
+              <label for="quickViewQuantity" class="mr-2 mb-0 text-dark">Quantity:</label>
               <input type="number" id="quickViewQuantity" class="form-control w-25" value="1" min="1">
             </div>
             <button id="addToCartButton" class="btn btn-success px-4">Add to Cart</button>
@@ -419,134 +443,349 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
 </div>
 
-
-</body>
-
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <script>
   // Example: Replace with Instagram Graph API or a fetch from your backend
-  const posts = [
-    "https://via.placeholder.com/400x400?text=Post+1",
-    "https://via.placeholder.com/400x400?text=Post+2",
-    "https://via.placeholder.com/400x400?text=Post+3",
-    "https://via.placeholder.com/400x400?text=Post+4",
-    "https://via.placeholder.com/400x400?text=Post+5",
-    "https://via.placeholder.com/400x400?text=Post+6"
-  ];
+  (function(){
+    const posts = [
+      "https://via.placeholder.com/400x400?text=Post+1",
+      "https://via.placeholder.com/400x400?text=Post+2",
+      "https://via.placeholder.com/400x400?text=Post+3",
+      "https://via.placeholder.com/400x400?text=Post+4",
+      "https://via.placeholder.com/400x400?text=Post+5",
+      "https://via.placeholder.com/400x400?text=Post+6"
+    ];
 
-  const feedContainer = document.getElementById("insta-feed");
+    const feedContainer = document.getElementById("insta-feed");
+    if (feedContainer) {
+      posts.forEach(url => {
+        const col = document.createElement("div");
+        col.className = "col-12 col-sm-2 col-md-3";
+        col.innerHTML = `
+          <div class="card border-0 shadow-sm">
+            <img src="${url}" class="card-img-top" alt="Instagram post">
+          </div>
+        `;
+        feedContainer.appendChild(col);
+      });
+    }
+  })();
 
-  posts.forEach(url => {
-    const col = document.createElement("div");
-    col.className = "col-12 col-sm-2 col-md-3";
-    col.innerHTML = `
-      <div class="card border-0 shadow-sm">
-        <img src="${url}" class="card-img-top" alt="Instagram post">
-      </div>
-    `;
-    feedContainer.appendChild(col);
+  // ===== QUICK VIEW + FILTERS =====
+  document.addEventListener('DOMContentLoaded', function() {
+    // Quick view handlers
+    document.querySelectorAll('.product-card .card').forEach(card => {
+      card.addEventListener('click', function (event) {
+        if (event.target.closest('button')) return; // don't open when clicking buttons
+
+        const imageEl = this.querySelector('.card-img-top');
+        const nameEl = this.querySelector('.card-title');
+        const priceEl = this.querySelector('.fw-semibold');
+        if (!imageEl || !nameEl || !priceEl) return;
+
+        document.getElementById('quickViewImage').src = imageEl.src;
+        document.getElementById('quickViewLabel').innerText = nameEl.textContent.trim();
+        document.getElementById('quickViewPrice').innerText = priceEl.innerText;
+        document.getElementById('quickViewQuantity').value = 1;
+
+        // Using jQuery/Bootstrap 4 modal API if available
+        if (typeof $ !== 'undefined' && $.fn && $.fn.modal) {
+          $('#quickViewModal').modal('show');
+        } else {
+          // Basic fallback
+          const modal = document.getElementById('quickViewModal');
+          modal.classList.add('show');
+          modal.style.display = 'block';
+          document.body.classList.add('modal-open');
+        }
+      });
+    });
+
+    // Close button
+    const closeBtn = document.getElementById('quickViewClose');
+    if (closeBtn) closeBtn.addEventListener('click', function(){
+      const modal = document.getElementById('quickViewModal');
+      if (typeof $ !== 'undefined' && $.fn && $.fn.modal) {
+        $(modal).modal('hide');
+      } else {
+        modal.classList.remove('show');
+        modal.style.display = 'none';
+        document.body.classList.remove('modal-open');
+        const backdrop = document.querySelector('.modal-backdrop'); if (backdrop) backdrop.remove();
+      }
+    });
+
+    document.getElementById('addToCartButton')?.addEventListener('click', function(){
+      const name = document.getElementById('quickViewLabel').innerText;
+      const qty = document.getElementById('quickViewQuantity').value;
+      alert(`${qty} × ${name} added to cart.`);
+      if (typeof $ !== 'undefined' && $.fn && $.fn.modal) $('#quickViewModal').modal('hide');
+    });
+
+    // Product data with categories and prices
+    const products = [
+      { id: 1, name: "BOP Tea - Whole Leaf", category: "tea", price: 246, element: null },
+      { id: 2, name: "Masala Tea", category: "tea", price: 2459, element: null },
+      { id: 3, name: "Ginger Tea", category: "tea", price: 2459, element: null },
+      { id: 4, name: "Cinnamon Tea", category: "tea", price: 2459, element: null },
+      { id: 5, name: "Cardamom Tea", category: "tea", price: 2459, element: null },
+      { id: 6, name: "Chocolate Tea", category: "tea", price: 2459, element: null },
+      { id: 7, name: "Kuzhumuzhagu", category: "spices", price: 2459, element: null },
+      { id: 8, name: "Elakkai", category: "spices", price: 2459, element: null },
+      { id: 9, name: "Cloves", category: "spices", price: 2459, element: null },
+      { id: 10, name: "Kudampuli", category: "spices", price: 2459, element: null },
+      { id: 11, name: "Cinnamon sticks", category: "spices", price: 2459, element: null },
+      { id: 12, name: "Almonds", category: "nuts", price: 2459, element: null },
+      { id: 13, name: "Dates", category: "nuts", price: 2459, element: null },
+      { id: 14, name: "Cashew", category: "nuts", price: 2459, element: null },
+      { id: 15, name: "Badam", category: "nuts", price: 2459, element: null },
+      { id: 16, name: "Lemongrass oil", category: "other", price: 1311, element: null },
+      { id: 17, name: "Achaar", category: "other", price: 2459, element: null },
+      { id: 18, name: "Strawberry preserve", category: "other", price: 2459, element: null }
+    ];
+
+    // Shared helpers --------------------------------------------------
+    function normalizeCategoryKey(raw) {
+      if (!raw) return null;
+      const s = raw.toString().toLowerCase();
+      if (s.includes('tea')) return 'tea';
+      if (s.includes('spice')) return 'spices';
+      if (s.includes('nut') || s.includes('almond') || s.includes('cashew') || s.includes('badam') || s.includes('date')) return 'nuts';
+      if (s.includes('other') || s.includes('savour') || s.includes('ripple') || s.includes('lemongrass') || s.includes('achar') || s.includes('preserve')) return 'other';
+      return null;
+    }
+
+    function getCardCategory(cardEl) {
+      // Prefer data-category, then try to normalize from title or existing attribute
+      const attr = (cardEl.getAttribute('data-category') || '').toLowerCase();
+      const normalized = normalizeCategoryKey(attr);
+      if (normalized) return normalized;
+      const title = cardEl.querySelector('.card-title')?.textContent || '';
+      const fromTitle = normalizeCategoryKey(title);
+      if (fromTitle) return fromTitle;
+      // As last resort, try to inspect small description text
+      const meta = cardEl.querySelector('.text-muted')?.textContent || '';
+      return normalizeCategoryKey(meta) || null;
+    }
+
+    function getCardPrice(cardEl) {
+      const attr = cardEl.getAttribute('data-price');
+      if (attr && !isNaN(parseInt(attr,10))) return parseInt(attr,10);
+      const priceText = cardEl.querySelector('.fw-semibold')?.textContent || '';
+      const numeric = priceText.replace(/[,₹\s]/g, '').match(/(\d+)/);
+      return numeric ? parseInt(numeric[1], 10) : 0;
+    }
+
+    // Initialize product elements by normalizing attributes for all DOM cards
+    function initializeProductElements() {
+      const productElements = document.querySelectorAll('.product-card');
+      productElements.forEach((el, idx) => {
+        // Always record original DOM order for reliable "default" sorting
+        el.setAttribute('data-original-order', idx);
+
+        // If a matching product exists, set canonical attributes
+        const title = el.querySelector('.card-title')?.textContent.trim();
+        const product = products.find(p => p.name === title);
+        if (product) {
+          product.element = el;
+          el.setAttribute('data-category', product.category);
+          el.setAttribute('data-price', product.price);
+          el.setAttribute('data-id', product.id);
+        } else {
+          // Normalize whatever data-category already exists (e.g., "spicefullness")
+          const rawCat = el.getAttribute('data-category') || '';
+          const norm = normalizeCategoryKey(rawCat) || normalizeCategoryKey(title) || normalizeCategoryKey(el.querySelector('.text-muted')?.textContent || '');
+          if (norm) el.setAttribute('data-category', norm);
+          // Ensure a data-price exists
+          const priceVal = getCardPrice(el);
+          el.setAttribute('data-price', priceVal);
+        }
+      });
+    }
+
+    // Filter state
+    let activeFilters = { categories: [], minPrice: null, maxPrice: null };
+
+    // DOM Elements
+    const categoryFilters = document.querySelectorAll('.category-filter');
+    const minPriceInput = document.getElementById('minPrice');
+    const maxPriceInput = document.getElementById('maxPrice');
+    const applyPriceBtn = document.getElementById('applyPrice');
+    const clearFiltersBtn = document.getElementById('clearFilters');
+    const sortSelect = document.getElementById('sortBy');
+    const productCount = document.getElementById('productCount');
+    const filterTags = document.getElementById('filterTags');
+
+    initializeProductElements();
+    applyFilters();
+
+    categoryFilters.forEach(filter => filter.addEventListener('change', handleCategoryFilter));
+    applyPriceBtn?.addEventListener('click', handlePriceFilter);
+    clearFiltersBtn?.addEventListener('click', clearAllFilters);
+    sortSelect?.addEventListener('change', handleSort);
+
+    function handleCategoryFilter() {
+      activeFilters.categories = Array.from(categoryFilters).filter(f => f.checked).map(f => f.value);
+      applyFilters(); updateFilterTags();
+    }
+
+    function handlePriceFilter() {
+      const min = minPriceInput.value ? parseInt(minPriceInput.value) : null;
+      const max = maxPriceInput.value ? parseInt(maxPriceInput.value) : null;
+      if ((min !== null && min < 0) || (max !== null && max < 0)) { alert('Price cannot be negative'); return; }
+      if (min !== null && max !== null && min > max) { alert('Minimum price cannot be greater than maximum price'); return; }
+      activeFilters.minPrice = min; activeFilters.maxPrice = max; applyFilters(); updateFilterTags();
+    }
+
+    function applyFilters() {
+      const allCards = Array.from(document.querySelectorAll('.product-card'));
+      let visibleCount = 0;
+
+      allCards.forEach(card => {
+        const cardCat = getCardCategory(card);
+        const cardPrice = getCardPrice(card);
+        let show = true;
+
+        if (activeFilters.categories.length > 0) {
+          // If card category is unknown, assume it should be excluded unless filters are empty
+          show = !!cardCat && activeFilters.categories.includes(cardCat);
+        }
+
+        if (show && activeFilters.minPrice !== null && cardPrice < activeFilters.minPrice) show = false;
+        if (show && activeFilters.maxPrice !== null && cardPrice > activeFilters.maxPrice) show = false;
+
+        card.style.display = show ? '' : 'none';
+        if (show) visibleCount++;
+      });
+
+      updateProductCount(visibleCount);
+      // After updating product visibility, hide/show the category headers
+      updateCategoryHeaders();
+    }
+
+    // Hide or show .product-division sections (category headers) depending on whether
+    // any visible product belongs to that category.
+    function updateCategoryHeaders() {
+      const divisions = document.querySelectorAll('.product-division');
+      const productGrid = document.getElementById('productGrid');
+      // helper to get category for a card element: prefer data-category, fall back to matching title
+      function getCardCategory(cardEl) {
+        const attr = (cardEl.getAttribute('data-category') || '').toLowerCase();
+        if (attr) return attr;
+        const title = cardEl.querySelector('.card-title')?.textContent.trim();
+        if (!title) return null;
+        const prod = products.find(p => p.name === title);
+        return prod ? prod.category : null;
+      }
+
+      divisions.forEach(div => {
+        const h2 = div.querySelector('h2');
+        if (!h2) return;
+        const headingText = h2.textContent.trim().toLowerCase();
+
+        // Map heading text to category key used by products data.
+        let categoryKey = null;
+        if (headingText.includes('tea')) categoryKey = 'tea';
+        else if (headingText.includes('spice')) categoryKey = 'spices';
+        else if (headingText.includes('nut')) categoryKey = 'nuts';
+        else if (headingText.includes('other') || headingText.includes('savour') || headingText.includes('savouries')) categoryKey = 'other';
+
+        if (!categoryKey) { div.style.display = ''; return; }
+
+        // Count visible product-card elements that match this category using robust category detection
+        const visibleCards = Array.from(document.querySelectorAll('.product-card')).filter(el => {
+          const cat = getCardCategory(el) || '';
+          const isVisible = (el.style.display !== 'none');
+          return isVisible && cat.toLowerCase() === categoryKey;
+        });
+
+        const visibleMatchCount = visibleCards.length;
+        console.debug(`Category header '${headingText}' mapped->'${categoryKey}' visible matches:`, visibleMatchCount);
+
+        if (visibleMatchCount > 0) {
+          // Make sure the section is visible
+          div.style.display = '';
+          // Move the entire section so it appears directly before the first visible card of that category
+          const firstCard = visibleCards[0];
+          if (productGrid && firstCard && firstCard.parentNode === productGrid) {
+            // Insert section before the first card
+            productGrid.insertBefore(div, firstCard);
+          } else if (productGrid && firstCard) {
+            // If firstCard isn't a direct child of productGrid, find its nearest ancestor
+            productGrid.insertBefore(div, firstCard);
+          }
+        } else {
+          // No visible cards for this category — hide the section
+          div.style.display = 'none';
+        }
+      });
+    }
+
+    function clearAllFilters() {
+      categoryFilters.forEach(f => f.checked = false);
+      minPriceInput.value = ''; maxPriceInput.value = '';
+      activeFilters = { categories: [], minPrice: null, maxPrice: null };
+      applyFilters(); updateFilterTags();
+    }
+
+    function handleSort() {
+      if (!sortSelect) return;
+      const sortValue = sortSelect.value;
+      const productGrid = document.getElementById('productGrid');
+      if (!productGrid) return;
+
+      // get product-card elements that are actually visible in the layout
+      let elems = Array.from(productGrid.querySelectorAll('.product-card')).filter(el => {
+        const style = window.getComputedStyle(el);
+        return style && style.display !== 'none' && style.visibility !== 'hidden' && el.offsetParent !== null;
+      });
+
+      console.debug('Sorting', { sortValue, visibleCount: elems.length });
+
+      if (sortValue === 'default') {
+        elems.sort((a,b) => (parseInt(a.getAttribute('data-original-order')||0) - parseInt(b.getAttribute('data-original-order')||0)));
+      } else if (sortValue === 'price-low') {
+        elems.sort((a,b) => (parseInt(a.getAttribute('data-price')||0) - parseInt(b.getAttribute('data-price')||0)));
+      } else if (sortValue === 'price-high') {
+        elems.sort((a,b) => (parseInt(b.getAttribute('data-price')||0) - parseInt(a.getAttribute('data-price')||0)));
+      } else if (sortValue === 'name') {
+        elems.sort((a,b) => a.querySelector('.card-title').textContent.localeCompare(b.querySelector('.card-title').textContent));
+      }
+
+      // Append in sorted order
+      elems.forEach(el => productGrid.appendChild(el));
+      // If a non-default sort is applied, hide all category headings so only products show.
+      if (sortValue && sortValue !== 'default') {
+        document.querySelectorAll('.product-division').forEach(div => div.style.display = 'none');
+        console.debug('Sort active — hiding category headers');
+      } else {
+        // Recompute category headers after reordering (restore normal behavior)
+        updateCategoryHeaders();
+      }
+    }
+
+    function updateProductCount(visibleCount = null) {
+      const totalCount = products.length;
+      if (visibleCount === null) productCount.textContent = `Showing all ${totalCount} products`;
+      else productCount.textContent = `Showing ${visibleCount} of ${totalCount} products`;
+    }
+
+    function updateFilterTags() {
+      filterTags.innerHTML = '';
+      activeFilters.categories.forEach(category => {
+        const tag = document.createElement('span'); tag.className = 'filter-badge'; tag.textContent = category.charAt(0).toUpperCase()+category.slice(1);
+        tag.style.cursor='pointer'; tag.addEventListener('click', ()=>{ const cb = document.querySelector(`.category-filter[value="${category}"]`); if(cb){cb.checked=false; handleCategoryFilter();}});
+        filterTags.appendChild(tag);
+      });
+      if (activeFilters.minPrice !== null || activeFilters.maxPrice !== null) {
+        const priceText = `₹${activeFilters.minPrice || '0'} - ₹${activeFilters.maxPrice || 'Any'}`;
+        const tag = document.createElement('span'); tag.className='filter-badge'; tag.textContent=priceText; tag.style.cursor='pointer';
+        tag.addEventListener('click', ()=>{ minPriceInput.value=''; maxPriceInput.value=''; handlePriceFilter(); });
+        filterTags.appendChild(tag);
+      }
+      document.getElementById('activeFilters').style.display = (activeFilters.categories.length>0 || activeFilters.minPrice!==null || activeFilters.maxPrice!==null)?'block':'none';
+    }
   });
 </script>
 
-<script>
-// ===== QUICK VIEW FUNCTIONALITY =====
-
-// Attach click listeners to every product card
-document.querySelectorAll('.product-card .card').forEach(card => {
-  card.addEventListener('click', function (event) {
-    // Skip opening modal if "Add to Cart" button is clicked
-    if (event.target.closest('button')) return;
-
-    // Get product data
-    const imageEl = this.querySelector('.card-img-top');
-    const nameEl = this.querySelector('.card-title');
-    const priceEl = this.querySelector('.fw-semibold');
-
-    if (!imageEl || !nameEl || !priceEl) {
-      console.error('Quick view: missing expected elements in product card');
-      return;
-    }
-
-    // Fill modal with card info
-    document.getElementById('quickViewImage').src = imageEl.src;
-    document.getElementById('quickViewLabel').innerText = nameEl.textContent.trim();
-    document.getElementById('quickViewPrice').innerText = priceEl.innerText;
-    document.getElementById('quickViewQuantity').value = 1;
-
-    // Display modal
-    $('#quickViewModal').modal('show');
-  });
-});
-
-// ===== ADD TO CART INSIDE MODAL =====
-document.getElementById('addToCartButton').addEventListener('click', () => {
-  const name = document.getElementById('quickViewLabel').innerText;
-  const qty = document.getElementById('quickViewQuantity').value;
-
-  // Example action — replace with your actual cart logic later
-  alert(`${qty} × ${name} added to cart.`);
-
-  // Close modal after adding
-  $('#quickViewModal').modal('hide');
-});
-
-// ===== OPTIONAL: CONSOLE FEEDBACK =====
-console.log('Quick View script initialized — waiting for clicks.');
-
-document.addEventListener('DOMContentLoaded', function() {
-    const closeButton = document.getElementById('quickViewClose');
-    const modalElement = document.getElementById('quickViewModal');
-
-    if (closeButton && modalElement) {
-        closeButton.addEventListener('click', function() {
-            // This uses Bootstrap's native method to hide the modal via JavaScript
-            $(modalElement).modal('hide'); 
-
-            // If you are NOT using jQuery/Bootstrap, use the following:
-            // modalElement.classList.remove('show');
-            // modalElement.style.display = 'none';
-            // document.body.classList.remove('modal-open'); 
-        });
-    }
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    const closeBtn = document.getElementById('quickViewCloseButton');
-    const modal = document.getElementById('quickViewModal');
-
-    if (closeBtn && modal) {
-        closeBtn.addEventListener('click', function(event) {
-            // IMPORTANT: Stop event propagation to prevent the click
-            // from triggering the "close on outside click" logic.
-            event.stopPropagation(); 
-
-            // Use jQuery/Bootstrap's native JS to hide the modal
-            // Assuming you have jQuery loaded (necessary for Bootstrap JS)
-            if (typeof $ !== 'undefined' && $.fn.modal) {
-                $(modal).modal('hide');
-            } else {
-                // Fallback if jQuery/Bootstrap JS is somehow missing/broken
-                modal.classList.remove('show');
-                modal.setAttribute('aria-hidden', 'true');
-                modal.style.display = 'none';
-                document.body.classList.remove('modal-open');
-
-                // Manually remove the backdrop if necessary
-                const backdrop = document.querySelector('.modal-backdrop');
-                if (backdrop) {
-                    backdrop.parentNode.removeChild(backdrop);
-                }
-            }
-        });
-    }
-});
-
-
-
-</script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
