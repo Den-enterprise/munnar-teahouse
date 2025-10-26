@@ -43,6 +43,17 @@
           <li class="nav-item"><a class="nav-link text-dark" href="our-products.html">Our Products</a></li>
         </ul>
       </div>
+      <!-- Cart button in navbar (opens cart panel) -->
+      <div class="d-flex align-items-center ms-auto">
+        <button id="navbarCartBtn" class="btn btn-outline-success btn-sm navbar-cart-btn" aria-label="Open cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path d="M6 6H21L20 14H8L6 6Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+            <circle cx="10" cy="19" r="1.4" fill="currentColor"/>
+            <circle cx="18" cy="19" r="1.4" fill="currentColor"/>
+          </svg>
+          <span class="ms-1">Cart</span> (<span id="navbarCartCount">0</span>)
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -786,6 +797,39 @@
     }
   });
 </script>
+
+<!-- Floating Cart Widget -->
+<div id="cartWidget" aria-live="polite">
+  <div id="cartToast" class="cart-toast" role="status" aria-atomic="true">
+    <div id="cartToastMessage">Added to cart</div>
+    <div class="d-flex align-items-center gap-2">
+      <button id="openCartBtn" class="btn btn-sm btn-success">View</button>
+      <button id="cartToastClose" class="btn btn-sm btn-outline-secondary">Close</button>
+    </div>
+  </div>
+
+  <div id="cartPanel" class="cart-panel" aria-hidden="true">
+    <div class="cart-header d-flex justify-content-between align-items-center">
+      <strong>Your Cart</strong>
+      <div>
+        <button id="clearCartBtn" class="btn btn-sm btn-outline-secondary me-2">Clear</button>
+        <button id="closeCartBtn" class="btn btn-sm btn-outline-dark">Close</button>
+      </div>
+    </div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-footer d-flex justify-content-between align-items-center">
+      <div>
+        <div class="small text-muted">Subtotal</div>
+        <div id="cartSubtotal" class="fw-bold">₹0</div>
+      </div>
+      <div>
+        <button id="checkoutBtn" class="btn btn-success">Checkout</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="scripts/cart.js"></script>
 
 </body>
 </html>
