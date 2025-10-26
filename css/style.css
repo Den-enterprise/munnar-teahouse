@@ -185,6 +185,61 @@
   z-index: 10;
 }
 
+/* Prefer reduced-motion on devices that request it */
+@media (prefers-reduced-motion: reduce) {
+  .product-card, .product-card:hover { transform: none !important; transition: none !important; }
+}
+
+/* Responsive product grid adjustments */
+/* Desktop large: 6 columns already defined above */
+@media (max-width: 1200px) {
+  .product-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; }
+}
+
+@media (max-width: 992px) {
+  .product-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  /* Make filter section a sticky column on larger tablets and desktop */
+  .filter-section { position: sticky; top: 90px; }
+}
+
+@media (max-width: 768px) {
+  .product-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .filter-section { position: static; }
+  /* Make product cards more touch-friendly */
+  .product-card .card { padding-bottom: 6px; }
+}
+
+@media (max-width: 600px) {
+  /* Mobile: single column list, stack filter on top */
+  .product-grid { grid-template-columns: 1fr; gap: 12px; padding-bottom: 20px; }
+  .filter-section { display: block; width: 100%; }
+  /* Make filter inputs full-width and comfortable for touch */
+  .filter-section .price-inputs { flex-direction: column; }
+  .filter-section .price-inputs input[type="number"] { width: 100%; }
+  .filter-section .filter-option { padding: 10px 6px; border-radius: 10px; }
+  /* Reduce hover elevation on touch devices to avoid layout shift */
+  .product-card:hover { transform: none; box-shadow: 0 6px 12px rgba(0,0,0,0.08); }
+  /* Keep buttons large enough for touch targets */
+  .filter-section .btn-success, .filter-section .btn-outline-secondary { padding: 10px 12px; width: 100%; }
+  .filter-badge { padding: 8px 12px; font-size: 0.95rem; }
+}
+
+/* Collapse filter into an accordion on narrow screens for a cleaner UX */
+@media (max-width: 576px) {
+  .filter-section { border-radius: 10px; padding: 12px; }
+}
+
+/* Improve product card text wrapping and spacing */
+.product-card .card-title { font-size: 0.95rem; line-height: 1.2; }
+.product-card .fw-semibold { font-size: 0.95rem; }
+
+/* Improve the product count and sort spacing on mobile */
+.d-flex.justify-content-between.align-items-center.mb-3 { gap: 12px; flex-wrap: wrap; }
+.d-flex.justify-content-between.align-items-center.mb-3 select { min-width: 160px; }
+
+/* Accessibility: ensure clickable badges have visual focus */
+.filter-badge:focus { outline: 2px dashed rgba(31,102,49,0.6); outline-offset: 3px; }
+
   .product-cardy img {
     object-fit: cover;
     height: 300px;
@@ -276,57 +331,51 @@
 }
 
 
-/* ==================================== */
-/* 2. TABLET / MEDIUM SCREENS (Up to 1024px) - THE FIX! */
-/* ==================================== */
-@media (max-width: 600px) {
-    
-    /* 1. Hide the decorative bar on tablets */
-    .divider-bar {
-        display: none;
-    }
 
-    /* 2. Adjust the header container (H2 will now take full width) */
-    .category-header {
-        display: block; /* Switch back to block flow */
-        text-align: left; /* Keep title aligned to the left */
-        padding-top: 15px; /* Slightly less vertical space */
-    }
+/* ==================================== */
+/* MEDIUM / TABLET / IN-BETWEEN BREAKPOINTS (600px - 1400px)
+   Clear, non-overlapping rules so the product grid scales smoothly
+   and the category header/bar visibility behaves predictably. */
+/* ==================================== */
 
-    /* 3. Adjust the title for medium screens */
-    .category-header h2 {
-        font-size: 1.6em; /* Slightly smaller title */
-        padding-right: 0; /* Remove the space that was for the bar */
-        margin-bottom: 15px;
-    }
-    
-    /* 4. Switch the product grid to 3 or 4 columns */
-    .product-grid {
-        grid-template-columns: repeat(4, 1fr); /* 4 columns for a cleaner tablet view */
-        gap: 15px;
-    }
+/* Default: desktop (>=1400px) handled further down; here we set
+   clear rules for the common mid ranges. */
+
+/* Small tablets / large mobiles: 601px - 767px => 2 columns */
+@media (min-width: 601px) and (max-width: 767px) {
+  .product-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  /* Keep the category header visible on these sizes */
+  .category-header { display: flex; }
+  .divider-bar { display: block; }
 }
 
+/* Medium tablets / small laptops: 768px - 991px => 3 columns */
+@media (min-width: 768px) and (max-width: 991px) {
+  .product-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .category-header { display: flex; }
+  .divider-bar { display: block; }
+}
 
-/* ==================================== */
-/* 3. MOBILE / SMALL SCREENS (Up to 600px) - Your "Show All" view */
-/* ==================================== */
+/* Large tablets / small desktops: 992px - 1199px => 4 columns */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .product-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .category-header { display: flex; }
+  .divider-bar { display: block; }
+}
+
+/* Narrow desktops: 1200px - 1399px => 5 columns */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .product-grid { grid-template-columns: repeat(5, 1fr); gap: 20px; }
+  .category-header { display: flex; }
+  .divider-bar { display: block; }
+}
+
+/* MOBILE / SMALL SCREENS (<=600px) - single column and hide the header */
 @media (max-width: 600px) {
-    
-    /* HIDE THE ENTIRE DIVISION HEADER on mobile */
-    .category-header {
-        display: none; 
-    }
-    
-    /* Display products in a single column to match a mobile list */
-    .product-grid {
-        grid-template-columns: 1fr;
-        gap: 10px;
-        padding-bottom: 15px; 
-    }
-    
-    /* NOTE: You must also ensure your platform or script is only 
-       displaying the first 4 products in this .product-grid on mobile. */
+  /* HIDE THE ENTIRE DIVISION HEADER on small mobile */
+  .category-header { display: none; }
+  /* Single column for product list */
+  .product-grid { grid-template-columns: 1fr; gap: 10px; padding-bottom: 15px; }
 }
 
   
@@ -364,6 +413,42 @@
       padding: 40px 0;
     }
 
+  }
+
+  /* Explicit responsive column counts for product grids */
+  /* Extra-large desktop: 6 columns (>= 1400px) */
+  @media (min-width: 1400px) {
+    .product-grid { grid-template-columns: repeat(6, 1fr); }
+    #productGrid { grid-template-columns: repeat(6, 1fr); }
+  }
+
+  /* Desktop: 5 columns (1200px - 1399px) */
+  @media (min-width: 1200px) and (max-width: 1399px) {
+    .product-grid { grid-template-columns: repeat(5, 1fr); }
+    #productGrid { grid-template-columns: repeat(5, 1fr); }
+  }
+
+  /* Laptop / small desktop: 4 columns (992px - 1199px) */
+  @media (min-width: 992px) and (max-width: 1199px) {
+    .product-grid { grid-template-columns: repeat(4, 1fr); }
+    #productGrid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  /* Tablet: 3 columns (768px - 991px) */
+  @media (min-width: 768px) and (max-width: 991px) {
+    .product-grid { grid-template-columns: repeat(3, 1fr); }
+    #productGrid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* Large mobile: 2 columns (601px - 767px) */
+  @media (min-width: 601px) and (max-width: 767px) {
+    .product-grid { grid-template-columns: repeat(2, 1fr); }
+    #productGrid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* Small mobile: 1 column (<=600px) already set earlier */
+
+
     .our-products-hero h2 {
       font-size: 1.8rem;
     }
@@ -371,7 +456,7 @@
     .our-products-hero p {
       font-size: 1rem;
     }
-}
+ 
 /* ========================= Filters panel ========================= */
 .filter-section {
   background: #fff;
@@ -593,3 +678,91 @@
   transform: translateY(0);
   opacity: 1;
 }
+
+/* Floating cart widget styles */
+#cartWidget { position: fixed; right: 20px; bottom: 18px; z-index: 1040; font-family: 'Open Sans', sans-serif; display: none; }
+#cartToast { background: #ffffff; border: 1px solid rgba(0,0,0,0.08); padding: 8px 10px; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); display: flex; gap:8px; align-items:center; opacity:0; transform: translateY(10px); transition: all .22s ease; }
+#cartToast.visible { opacity: 1; transform: translateY(0); }
+#cartToast .btn { margin-left: 6px; }
+
+.cart-panel { width: 340px; max-width: calc(100vw - 40px); background: #fff; border-radius: 10px; box-shadow: 0 18px 45px rgba(10,20,30,0.12); overflow: hidden; margin-top: 8px; transform-origin: bottom right; transform: translateY(12px) scale(.98); opacity:0; visibility:hidden; transition: all .18s ease; }
+.cart-panel.open { transform: translateY(0) scale(1); opacity:1; visibility:visible; }
+.cart-header { padding: 10px 12px; border-bottom: 1px solid #f1f1f1; background: #fff; }
+.cart-items { max-height: 320px; overflow:auto; padding: 10px 12px; }
+.cart-item { border-bottom: 1px solid #f6f6f6; }
+.cart-item-img { width:56px; height:56px; object-fit:cover; }
+.cart-footer { padding: 12px; border-top: 1px solid #f1f1f1; background:#fff; }
+.cart-items .btn { padding: 2px 8px; }
+
+@media (max-width: 600px) {
+  #cartWidget { right: 12px; bottom: 12px; }
+  .cart-panel { width: 92vw; }
+}
+
+/* Navbar cart button styling */
+.navbar-cart-btn { display: inline-flex; align-items: center; gap: 6px; }
+.navbar-cart-btn svg { display: inline-block; vertical-align: middle; }
+.navbar-cart-btn span { line-height: 1; }
+
+/* ------------------------------------------------------------------
+   Overrides to counter Bootstrap's column classes so the product cards
+   form the intended 1-6 column layout across mid breakpoints. We use
+   !important to override Bootstrap's `col-` widths applied to the
+   product-card elements.
+   ------------------------------------------------------------------ */
+
+/* 601px - 767px : 2 columns */
+@media (min-width: 601px) and (max-width: 767px) {
+  #productGrid > .product-card {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+}
+
+/* 768px - 991px : 3 columns */
+@media (min-width: 768px) and (max-width: 991px) {
+  #productGrid > .product-card {
+    flex: 0 0 33.3333% !important;
+    max-width: 33.3333% !important;
+  }
+}
+
+/* 992px - 1199px : 4 columns */
+@media (min-width: 992px) and (max-width: 1199px) {
+  #productGrid > .product-card {
+    flex: 0 0 25% !important;
+    max-width: 25% !important;
+  }
+}
+
+/* 1200px - 1399px : 5 columns */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  #productGrid > .product-card {
+    flex: 0 0 20% !important;
+    max-width: 20% !important;
+  }
+}
+
+/* 1400px and up : 6 columns (restore expected desktop) */
+@media (min-width: 1400px) {
+  #productGrid > .product-card {
+    flex: 0 0 16.6667% !important;
+    max-width: 16.6667% !important;
+  }
+}
+
+/* Reduce cramped vertical stacking: increase image height on mid/large */
+#productGrid .product-card .card-img-top { height: 220px; object-fit: cover; }
+@media (min-width: 1200px) { #productGrid .product-card .card-img-top { height: 260px; } }
+@media (max-width: 600px) { #productGrid .product-card .card-img-top { height: 200px; } }
+
+/* Improve title wrapping and reduce extreme vertical stacking */
+#productGrid .product-card .card-title {
+  font-size: 0.95rem;
+  line-height: 1.25;
+  white-space: normal;
+  hyphens: auto;
+}
+
+/* Ensure hover transform origin is centered so cards don't push neighbors */
+.product-card { transform-origin: center top; }
