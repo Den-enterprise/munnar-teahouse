@@ -117,6 +117,20 @@
 
   function clearCart(){ localStorage.removeItem(CART_KEY); renderCart(); }
 
+  function getCheckoutPayload(){
+    const cart = readCart();
+    const subtotal = cart.reduce((s,i)=>s + (i.price||0) * (i.qty||0), 0);
+    const totalQty = cart.reduce((s,i)=>s + (i.qty||0), 0);
+    const payload = {
+      createdAt: new Date().toISOString(),
+      currency: 'INR',
+      subtotal: subtotal,
+      totalItems: totalQty,
+      items: cart.map(i=>({ id: i.id, title: i.title, price: i.price, qty: i.qty, img: i.img }))
+    };
+    return payload;
+  }
+
   function initBindings(){
     ensureUI();
     // Close button for toast
@@ -152,11 +166,23 @@
     if(openCartBtn) { openCartBtn.addEventListener('click', ()=>{ if(cartPanel){ cartPanel.classList.toggle('open'); cartPanel.setAttribute('aria-hidden', String(!cartPanel.classList.contains('open'))); } }); }
     if(closeCartBtn) { closeCartBtn.addEventListener('click', ()=>{ if(cartPanel){ cartPanel.classList.remove('open'); cartPanel.setAttribute('aria-hidden','true'); } }); }
     if(clearCartBtn) { clearCartBtn.addEventListener('click', ()=>{ if(confirm('Clear cart?')){ clearCart(); } }); }
-    if(checkoutBtn) { checkoutBtn.addEventListener('click', ()=>{ window.location.href = 'product-cart.html'; }); }
+    if(checkoutBtn) {
+      checkoutBtn.addEventListener('click', ()=>{
+        try{
+          const payload = getCheckoutPayload();
+          // store payload both on the MTCart object and in localStorage so other pages can read it
+          window.MTCart.pendingCheckout = payload;
+          localStorage.setItem('mt_checkout_payload', JSON.stringify(payload));
+          // navigate to a local checkout page which will show the payload and allow confirming payment
+          // Change this URL to your third-party integration endpoint if you prefer to POST directly
+          window.location.href = 'checkout.html';
+        }catch(e){ console.warn('checkout failed', e); }
+      });
+    }
   }
 
   // expose for tests and external hooks
-  window.MTCart = { readCart, writeCart, addItemToCart, updateQty, removeItem, clearCart, renderCart };
+  window.MTCart = { readCart, writeCart, addItemToCart, updateQty, removeItem, clearCart, renderCart, getCheckoutPayload };
 
   // initialize when DOM is ready
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function(){ initBindings(); renderCart(); });
