@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout - Munnar Tea House</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <h2 class="mb-3">Confirm your order</h2>
+    <div id="checkoutArea" class="card shadow-sm p-3">
+      <div id="checkoutItems"></div>
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <div>
+          <div class="small text-muted">Subtotal</div>
+          <div id="checkoutSubtotal" class="fw-bold">₹0</div>
+        </div>
+        <div>
+          <button id="confirmBtn" class="btn btn-success">Confirm & Pay</button>
+          <button id="backBtn" class="btn btn-outline-secondary ms-2">Back</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  function formatPrice(n){ return '₹' + (Math.round(n)).toLocaleString('en-IN'); }
+  function loadPayload(){
+    try{
+      const raw = localStorage.getItem('mt_checkout_payload');
+      if(!raw) return null;
+      return JSON.parse(raw);
+    }catch(e){ return null; }
+  }
+  const payload = loadPayload() || window.MTCart && window.MTCart.getCheckoutPayload && window.MTCart.getCheckoutPayload();
+  const itemsEl = document.getElementById('checkoutItems');
+  const subtotalEl = document.getElementById('checkoutSubtotal');
+  if(!payload){ itemsEl.innerHTML = '<div class="text-muted">No items in cart.</div>'; subtotalEl.textContent = '₹0'; }
+  else{
+    itemsEl.innerHTML = '';
+    payload.items.forEach(it=>{
+      const row = document.createElement('div'); row.className = 'd-flex align-items-center gap-3 border-bottom py-2';
+      row.innerHTML = `
+        <img src="${it.img||''}" style="width:64px;height:64px;object-fit:cover;border-radius:6px;" alt="">
+        <div class="flex-grow-1">
+          <div class="fw-semibold">${it.title}</div>
+          <div class="small text-muted">${formatPrice(it.price)} × ${it.qty}</div>
+        </div>
+        <div class="fw-bold">${formatPrice(it.price*it.qty)}</div>
+      `;
+      itemsEl.appendChild(row);
+    });
+    subtotalEl.textContent = formatPrice(payload.subtotal);
+  }
+
+  document.getElementById('backBtn').addEventListener('click', function(){ window.history.back(); });
+
+  document.getElementById('confirmBtn').addEventListener('click', function(){
+    if(!payload){ alert('Nothing to checkout'); return; }
+    // Example: submit to third-party payment endpoint via a POST form with JSON payload
+    const thirdPartyUrl = 'https://example-checkout-processor.example/receive'; // <-- replace with real URL
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = thirdPartyUrl;
+    // Use a hidden input with the JSON payload
+    const input = document.createElement('input');
+    input.type = 'hidden'; input.name = 'payload'; input.value = JSON.stringify(payload);
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
+  });
+})();
+</script>
+</body>
+</html>
