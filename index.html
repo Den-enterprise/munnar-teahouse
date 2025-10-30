@@ -60,7 +60,7 @@
     <div class="hero-content">
       <h1>Munnar Tea House</h1>
       <p>The authentic taste of the Western Ghats</p>
-      <a href="#" class="btn btn-shop">Shop Now <img src="images\whatsapp.ico" style="width: 25px;"/></a>
+      <a href="https://wa.me/c/918891577066" class="btn btn-shop">Shop Now <img src="images\whatsapp.ico" style="width: 25px;"/></a>
     </div>
   </section>
 
@@ -653,6 +653,17 @@ At Munnar Tea House and Spicefulness, we don’t just deliver taste—we deliver
         document.getElementById('quickViewLabel').innerText = nameEl.textContent.trim();
         document.getElementById('quickViewPrice').innerText = priceEl.innerText;
         document.getElementById('quickViewQuantity').value = 1;
+        // Product description: prefer the products list description, then data-description on the card, else fallback text
+        try{
+          const descEl = document.getElementById('quickViewDescription');
+          let descText = '';
+          if (typeof products !== 'undefined') {
+            const prod = products.find(p => p.name === nameEl.textContent.trim());
+            if (prod && prod.description) descText = prod.description;
+          }
+          if (!descText) descText = this.closest('.product-card')?.getAttribute('data-description') || 'A delightful product from Munnar Tea House.';
+          if (descEl) descEl.textContent = descText;
+        }catch(_){ }
 
         // Using jQuery/Bootstrap 4 modal API if available
         if (typeof $ !== 'undefined' && $.fn && $.fn.modal) {
@@ -685,24 +696,24 @@ At Munnar Tea House and Spicefulness, we don’t just deliver taste—we deliver
 
     // Product data with categories and prices
     const products = [
-      { id: 1, name: "BOP Tea - Whole Leaf", category: "tea", price: 200, element: null },
-      { id: 2, name: "Masala Tea", category: "tea", price: 120, element: null },
-      { id: 3, name: "Ginger Tea", category: "tea", price: 120, element: null },
-      { id: 4, name: "Cinnamon Tea", category: "tea", price: 2459, element: null },
-      { id: 5, name: "Cardamom Tea", category: "tea", price: 2459, element: null },
-      { id: 6, name: "Chocolate Tea", category: "tea", price: 120, element: null },
-      { id: 7, name: "Kuzhumuzhagu", category: "spices", price: 250, element: null },
-      { id: 8, name: "Elakkai", category: "spices", price: 350, element: null },
-      { id: 9, name: "Cloves", category: "spices", price: 2459, element: null },
-      { id: 10, name: "Kudampuli", category: "spices", price: 2459, element: null },
-      { id: 11, name: "Cinnamon sticks", category: "spices", price: 2459, element: null },
-      { id: 12, name: "Almonds", category: "nuts", price: 250, element: null },
-      { id: 13, name: "Dates", category: "nuts", price: 2459, element: null },
-      { id: 14, name: "Cashew", category: "nuts", price: 280, element: null },
-      { id: 15, name: "Badam", category: "nuts", price: 250, element: null },
-      { id: 16, name: "Lemongrass oil", category: "other", price: 1311, element: null },
-      { id: 17, name: "Achaar", category: "other", price: 2459, element: null },
-      { id: 18, name: "Strawberry preserve", category: "other", price: 2459, element: null }
+      { id: 1, name: "BOP Tea - Whole Leaf", category: "tea", price: 200, description: "Classic BOP whole-leaf tea — brisk, full-bodied with malty notes and rich antioxidants. Perfect for daily brewing.", element: null },
+      { id: 2, name: "Masala Tea", category: "tea", price: 120, description: "Traditional masala tea blend with aromatic spices (cardamom, cinnamon, ginger) for a warm, spiced cup. Ready-to-brew for chai lovers.", element: null },
+      { id: 3, name: "Ginger Tea", category: "tea", price: 120, description: "Pure ginger-infused tea: bright, spicy and soothing. Great for digestion and a warming cup on cool days.", element: null },
+      { id: 4, name: "Cinnamon Tea", category: "tea", price: 2459, description: "Fragrant cinnamon tea made with premium cinnamon sticks, offering sweet-spicy notes and comforting warmth.", element: null },
+      { id: 5, name: "Cardamom Tea", category: "tea", price: 2459, description: "Aromatic cardamom tea with a floral, citrusy lift — a South Indian classic that pairs beautifully with milk.", element: null },
+      { id: 6, name: "Chocolate Tea", category: "tea", price: 120, description: "Unique chocolate-flavoured tea combining cocoa undertones with tea for a mildly sweet, indulgent brew.", element: null },
+      { id: 7, name: "Kuzhumuzhagu", category: "spices", price: 250, description: "Kuzhumuzhagu — a traditional Kerala spice with an earthy, robust aroma used in masalas and pickles.", element: null },
+      { id: 8, name: "Elakkai", category: "spices", price: 350, description: "Elakkai (cardamom) whole pods — intensely fragrant and ideal for teas, desserts, and savory dishes.", element: null },
+      { id: 9, name: "Cloves", category: "spices", price: 2459, description: "Whole cloves: warm, pungent spice used for flavouring teas, pickles, and traditional recipes.", element: null },
+      { id: 10, name: "Kudampuli", category: "spices", price: 2459, description: "Kudampuli (Garcinia cambogia) — tangy, sour fruit used in regional cooking to add bright, citrusy notes.", element: null },
+      { id: 11, name: "Cinnamon sticks", category: "spices", price: 2459, description: "Whole cinnamon sticks — high-quality bark for longer infusion, perfect for spiced teas and desserts.", element: null },
+      { id: 12, name: "Almonds", category: "nuts", price: 250, description: "Premium almonds — crunchy, nutrient-rich, perfect for snacking and baking.", element: null },
+      { id: 13, name: "Dates", category: "nuts", price: 2459, description: "Sweet, chewy dates — natural energy bites for snacking or cooking.", element: null },
+      { id: 14, name: "Cashew", category: "nuts", price: 280, description: "Whole cashews — rich, buttery nuts ideal for snacking and cooking.", element: null },
+      { id: 15, name: "Badam", category: "nuts", price: 250, description: "Badam (roasted almonds) — delicate, mildly sweet and perfect as a healthy snack or garnish.", element: null },
+      { id: 16, name: "Lemongrass oil", category: "other", price: 1311, description: "Lemongrass oil — aromatic, citrusy essential oil suitable for culinary use and aromatherapy.", element: null },
+      { id: 17, name: "Achaar", category: "other", price: 2459, description: "Homemade achaar (pickle) — tangy-spicy condiment made with traditional spices; a flavorful companion to meals.", element: null },
+      { id: 18, name: "Strawberry preserve", category: "other", price: 2459, description: "Strawberry preserve — sweet, fruity spread made from ripe strawberries; great on toast and desserts.", element: null }
     ];
 
     // Shared helpers --------------------------------------------------
@@ -1165,40 +1176,6 @@ document.addEventListener("DOMContentLoaded", function () {
 </footer>
 
 
-
-<div class="modal fade" id="quickViewModal" tabindex="-1" role="dialog" aria-labelledby="quickViewLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header border-0">
-        <h5 class="modal-title font-weight-bold text-dark" id="quickViewLabel">Product Name</h5>
-        <button type="button" class="close" aria-label="Close" id="quickViewClose">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <div class="row align-items-center">
-          <div class="col-md-5 text-center mb-3">
-            <img id="quickViewImage" src="" alt="Product Image" class="img-fluid rounded shadow-sm">
-          </div>
-          <div class="col-md-7">
-            <h4 id="quickViewPrice" class="text-success mb-3"></h4>
-            <p id="quickViewDescription" class="text-muted">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at commodo nulla, vel imperdiet nisi.
-            </p>
-            <div class="d-flex align-items-center my-3">
-              <label for="quickViewQuantity" class="mr-2 mb-0 text-dark">Quantity:    </label>
-              <input type="number" id="quickViewQuantity" class="form-control w-25" value="1" min="1">
-            </div>
-            <button id="addToCartButton" class="btn btn-success px-4">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 </body>
 
   <!-- Bootstrap JS -->
@@ -1255,6 +1232,17 @@ document.querySelectorAll('.product-card .card').forEach(card => {
     document.getElementById('quickViewLabel').innerText = nameEl.textContent.trim();
     document.getElementById('quickViewPrice').innerText = priceEl.innerText;
     document.getElementById('quickViewQuantity').value = 1;
+    // Product description: prefer the products list description, then data-description on the card, else fallback text
+    try{
+      const descEl = document.getElementById('quickViewDescription');
+      let descText = '';
+      if (typeof products !== 'undefined') {
+        const prod = products.find(p => p.name === nameEl.textContent.trim());
+        if (prod && prod.description) descText = prod.description;
+      }
+      if (!descText) descText = this.closest('.product-card')?.getAttribute('data-description') || 'A delightful product from Munnar Tea House.';
+      if (descEl) descEl.textContent = descText;
+    }catch(_){ }
 
     // Display modal
     $('#quickViewModal').modal('show');
