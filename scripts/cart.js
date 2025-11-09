@@ -7,15 +7,17 @@
   }
   function writeCart(cart){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
 
+  function formatPrice(n){ return '₹' + (Math.round(n)).toLocaleString('en-IN'); }
+
   function findProductDataFromCard(btn){
     const card = btn.closest('.product-card');
     if(!card) return null;
     const title = card.querySelector('.card-title')?.textContent.trim() || 'Product';
     const img = card.querySelector('.card-img-top')?.src || '';
-  // Extract the first numeric group from the price text (prevents units like "250g" or "100ml" from concatenating)
-  const rawPriceText = (card.querySelector('.fw-semibold')?.textContent || card.querySelector('.fw-bold')?.textContent || '').trim();
-  const match = rawPriceText.match(/(\d[\d,]*)/);
-  const price = match ? parseInt(match[1].replace(/,/g, ''), 10) : (parseInt(card.getAttribute('data-price')||0, 10) || 0);
+  // Extract the first contiguous numeric group from the price text (avoids concatenating unit numbers like "/ 100ml")
+  const rawPriceText = (card.querySelector('.fw-semibold')?.textContent || card.querySelector('.fw-bold')?.textContent || '');
+  const firstNumMatch = rawPriceText.replace(/,/g, '').match(/(\d+)/);
+  const price = firstNumMatch ? parseInt(firstNumMatch[1], 10) : parseInt(card.getAttribute('data-price')||0, 10) || 0;
     const id = card.getAttribute('data-id') || card.getAttribute('data-original-order') || title;
     return { id: String(id), title, img, price };
   }
@@ -151,7 +153,18 @@
     // modal add buttons
     const modalAddButtons = document.querySelectorAll('#addToCartButton');
     if(modalAddButtons && modalAddButtons.length){
-      modalAddButtons.forEach(mbtn=>{ try{ mbtn.addEventListener('click', function(e){ try{ e.preventDefault(); }catch(_){ } const title = document.getElementById('quickViewLabel')?.innerText?.trim(); if(!title) return; const img = document.getElementById('quickViewImage')?.src || ''; const priceText = (document.getElementById('quickViewPrice')?.innerText || ''); const price = parseInt(priceText.replace(/[^0-9]/g,'')) || 0; const qty = parseInt(document.getElementById('quickViewQuantity')?.value) || 1; const id = 'modal-' + title; addItemToCart({ id: id, title: title, img: img, price: price }, qty); try{ if (typeof $ !== 'undefined' && $.fn && $.fn.modal) $('#quickViewModal').modal('hide'); else { const modal = document.getElementById('quickViewModal'); if(modal){ modal.classList.remove('show'); modal.style.display='none'; document.body.classList.remove('modal-open'); const backdrop = document.querySelector('.modal-backdrop'); if(backdrop) backdrop.remove(); } } }catch(_){ } }); }catch(e){ console.warn('Failed binding modal add button', e); } });
+      modalAddButtons.forEach(mbtn=>{ try{ mbtn.addEventListener('click', function(e){ try{ e.preventDefault(); }catch(_){ }
+        const title = document.getElementById('quickViewLabel')?.innerText?.trim(); if(!title) return;
+        const img = document.getElementById('quickViewImage')?.src || '';
+        // Parse price from modal display: take first numeric group to avoid capturing unit numbers
+        const priceText = (document.getElementById('quickViewPrice')?.innerText || '');
+        const priceMatch = priceText.replace(/,/g,'').match(/(\d+)/);
+        const price = priceMatch ? parseInt(priceMatch[1], 10) : 0;
+        const qty = parseInt(document.getElementById('quickViewQuantity')?.value) || 1;
+        const id = 'modal-' + title;
+        addItemToCart({ id: id, title: title, img: img, price: price }, qty);
+        try{ if (typeof $ !== 'undefined' && $.fn && $.fn.modal) $('#quickViewModal').modal('hide'); else { const modal = document.getElementById('quickViewModal'); if(modal){ modal.classList.remove('show'); modal.style.display='none'; document.body.classList.remove('modal-open'); const backdrop = document.querySelector('.modal-backdrop'); if(backdrop) backdrop.remove(); } } }catch(_){ }
+      }); }catch(e){ console.warn('Failed binding modal add button', e); } });
     }
 
     // delegated fallback for buttons in case new buttons are added dynamically
