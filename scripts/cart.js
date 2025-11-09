@@ -7,8 +7,6 @@
   }
   function writeCart(cart){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
 
-  function formatPrice(n){ return '₹' + (Math.round(n)).toLocaleString('en-IN'); }
-
   function findProductDataFromCard(btn){
     const card = btn.closest('.product-card');
     if(!card) return null;
