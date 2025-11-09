@@ -14,7 +14,10 @@
     if(!card) return null;
     const title = card.querySelector('.card-title')?.textContent.trim() || 'Product';
     const img = card.querySelector('.card-img-top')?.src || '';
-    const price = parseInt((card.querySelector('.fw-semibold')?.textContent||card.querySelector('.fw-bold')?.textContent||'').replace(/[^0-9]/g,'')) || parseInt(card.getAttribute('data-price')||0) || 0;
+  // Extract the first numeric group from the price text (prevents units like "250g" or "100ml" from concatenating)
+  const rawPriceText = (card.querySelector('.fw-semibold')?.textContent || card.querySelector('.fw-bold')?.textContent || '').trim();
+  const match = rawPriceText.match(/(\d[\d,]*)/);
+  const price = match ? parseInt(match[1].replace(/,/g, ''), 10) : (parseInt(card.getAttribute('data-price')||0, 10) || 0);
     const id = card.getAttribute('data-id') || card.getAttribute('data-original-order') || title;
     return { id: String(id), title, img, price };
   }
