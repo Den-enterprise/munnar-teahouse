@@ -11,22 +11,49 @@
   <div class="container py-5">
     <h2 class="mb-3">Confirm your order</h2>
     <div id="checkoutArea" class="card shadow-sm p-3">
-      <div id="checkoutItems"></div>
-      <div class="d-flex justify-content-between align-items-center mt-3">
-        <div>
-          <div class="small text-muted">Subtotal</div>
-          <div id="checkoutSubtotal" class="fw-bold">₹0</div>
+      <!-- Formspree form: will send order and customer details to Formspree -->
+      <form id="checkoutForm" action="https://formspree.io/f/xjkjpbaj" method="POST">
+        <div id="checkoutItems"></div>
+
+        <div class="row g-3 mt-3">
+          <div class="col-md-4">
+            <label for="customerName" class="form-label">Name</label>
+            <input id="customerName" name="name" class="form-control" required>
+          </div>
+          <div class="col-md-4">
+            <label for="customerEmail" class="form-label">Email</label>
+            <input id="customerEmail" name="email" type="email" class="form-control" required>
+          </div>
+          <div class="col-md-4">
+            <label for="customerPhone" class="form-label">Phone</label>
+            <input id="customerPhone" name="phone" type="tel" class="form-control" required>
+          </div>
+          <div class="col-md-12">
+            <label for="customerAddress" class="form-label">Shipping address</label>
+            <input id="customerAddress" name="address" type="text" class="form-control" placeholder="Street, city, postcode, country" required>
+          </div>
         </div>
-        <div>
-          <button id="confirmBtn" class="btn btn-success">Confirm & Pay</button>
-          <button id="backBtn" class="btn btn-outline-secondary ms-2">Back</button>
+
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <div>
+            <div class="small text-muted">Subtotal</div>
+            <div id="checkoutSubtotal" class="fw-bold">₹0</div>
+          </div>
+          <div>
+            <input type="hidden" name="order_payload" id="orderPayloadField">
+            <input type="hidden" name="order_summary" id="orderSummaryField">
+            <input type="hidden" name="_subject" value="New order from Munnar Tea House Website">
+            <input type="hidden" name="_replyto" id="replyToField">
+            <button id="confirmBtn" type="submit" class="btn btn-success">Send Order</button>
+            <button id="backBtn" type="button" class="btn btn-outline-secondary ms-2">Back</button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 
 <script>
-(function(){
+  (function(){
   function formatPrice(n){ return '₹' + (Math.round(n)).toLocaleString('en-IN'); }
   function loadPayload(){
     try{
@@ -35,44 +62,78 @@
       return JSON.parse(raw);
     }catch(e){ return null; }
   }
-  const payload = loadPayload() || window.MTCart && window.MTCart.getCheckoutPayload && window.MTCart.getCheckoutPayload();
+
+  const payload = loadPayload() || (window.MTCart && window.MTCart.getCheckoutPayload && window.MTCart.getCheckoutPayload());
   const itemsEl = document.getElementById('checkoutItems');
   const subtotalEl = document.getElementById('checkoutSubtotal');
-  if(!payload){ itemsEl.innerHTML = '<div class="text-muted">No items in cart.</div>'; subtotalEl.textContent = '₹0'; }
+  //const orderPayloadField = document.getElementById('orderPayloadField');
+  const orderSummaryField = document.getElementById('orderSummaryField');
+  const checkoutForm = document.getElementById('checkoutForm');
+
+  function humanOrderSummary(p){
+    if(!p || !p.items || !p.items.length) return 'No items';
+    return p.items.map(i=>`${i.title} x ${i.qty} @ ${formatPrice(i.price)} = ${formatPrice((i.price||0)*(i.qty||0))}`).join('\n');
+  }
+
+  if(!payload){
+    itemsEl.innerHTML = '<div class="text-muted">No items in cart.</div>';
+    subtotalEl.textContent = '₹0';
+    if(checkoutForm){ Array.from(checkoutForm.querySelectorAll('input,button,textarea,select')).forEach(el=>el.disabled=true); }
+  }
   else{
     itemsEl.innerHTML = '';
     payload.items.forEach(it=>{
       const row = document.createElement('div'); row.className = 'd-flex align-items-center gap-3 border-bottom py-2';
       row.innerHTML = `
-        <img src="${it.img||''}" style="width:64px;height:64px;object-fit:cover;border-radius:6px;" alt="">
+        <div style="width:64px;height:64px;display:flex;align-items:center;justify-content:center;border-radius:6px;overflow:hidden;background:#f7f7f7;">
+          ${it.img?`<img src="${it.img}" style="width:100%;height:100%;object-fit:cover;" alt="">`:''}
+        </div>
         <div class="flex-grow-1">
           <div class="fw-semibold">${it.title}</div>
           <div class="small text-muted">${formatPrice(it.price)} × ${it.qty}</div>
         </div>
-        <div class="fw-bold">${formatPrice(it.price*it.qty)}</div>
+        <div class="fw-bold">${formatPrice((it.price||0)*(it.qty||0))}</div>
       `;
       itemsEl.appendChild(row);
     });
     subtotalEl.textContent = formatPrice(payload.subtotal);
+    // Sanitize payload before sending: remove any local file paths (img) to avoid leaking file:// paths in emails
+    const safePayload = JSON.parse(JSON.stringify(payload));
+    if(Array.isArray(safePayload.items)){
+      safePayload.items = safePayload.items.map(i=>{
+        const { img, ...rest } = i; return rest;
+      });
+    }
+    if(orderPayloadField) orderPayloadField.value = JSON.stringify(safePayload);
+    if(orderSummaryField) orderSummaryField.value = humanOrderSummary(payload);
   }
 
   document.getElementById('backBtn').addEventListener('click', function(){ window.history.back(); });
 
-  document.getElementById('confirmBtn').addEventListener('click', function(){
-    if(!payload){ alert('Nothing to checkout'); return; }
-    // Example: submit to third-party payment endpoint via a POST form with JSON payload
-    const thirdPartyUrl = 'https://example-checkout-processor.example/receive'; // <-- replace with real URL
+  // Before the form submits, ensure hidden payloads are up-to-date and basic validation is present
+  if(checkoutForm){
+    checkoutForm.addEventListener('submit', function(e){
+      // ensure payloads are present
+      if(!payload){ e.preventDefault(); alert('Nothing to checkout'); return; }
+      // Build a sanitized copy of the payload without img paths and include customer info
+      const safePayload = JSON.parse(JSON.stringify(payload));
+      if(Array.isArray(safePayload.items)){
+        safePayload.items = safePayload.items.map(i=>{ const { img, ...rest } = i; return rest; });
+      }
+      // attach customer details from the form to the payload
+      const customerName = document.getElementById('customerName')?.value || '';
+      const customerEmail = document.getElementById('customerEmail')?.value || '';
+      const customerPhone = document.getElementById('customerPhone')?.value || '';
+      const customerAddress = document.getElementById('customerAddress')?.value || '';
+      safePayload.customer = { name: customerName, email: customerEmail, phone: customerPhone, address: customerAddress };
+      if(orderPayloadField) orderPayloadField.value = JSON.stringify(safePayload);
+      if(orderSummaryField) orderSummaryField.value = humanOrderSummary(payload) + (customerAddress ? '\n\nShipping: ' + customerAddress : '');
+      // populate reply-to so Formspree can reply to the customer
+      const replyTo = document.getElementById('replyToField'); if(replyTo) replyTo.value = customerEmail;
+      // Let the browser submit normally to Formspree.
+    });
+  }
 
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = thirdPartyUrl;
-    // Use a hidden input with the JSON payload
-    const input = document.createElement('input');
-    input.type = 'hidden'; input.name = 'payload'; input.value = JSON.stringify(payload);
-    form.appendChild(input);
-    document.body.appendChild(form);
-    form.submit();
-  });
 })();
 </script>
 </body>
