@@ -13,7 +13,7 @@
 
     /* Ensure media and large elements don't exceed their containers */
     img, video, iframe { max-width: 100%; height: auto; display: block; }
-    .container, .container-fluid { max-width: 100%; }
+    /* .container, .container-fluid { max-width: 100%; } */
 
 
 /*===================== NAV BAR ======================*/
@@ -407,6 +407,12 @@
     padding: 60px 0;
   }
 
+  .our-product-hero {
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                url('../images/product.jpg') center center / cover no-repeat;
+    height: 300px;
+    padding: 60px 0;
+  }
   @media (max-width: 600px) {
     .our-products-hero {
       height: 250px;
@@ -459,7 +465,8 @@
  
 /* ========================= Filters panel ========================= */
 .filter-section {
-  background: #fff;
+  color: white;
+  background: #82af5f;
   border-radius: 12px;
   padding: 18px;
   box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
@@ -467,8 +474,8 @@
 }
 
 .filter-section .filter-title {
-  font-weight: 600;
-  color: #1f6631;
+  font-weight: 800;
+  color: #ffffff;
   margin-bottom: 8px;
 }
 
@@ -504,13 +511,21 @@
 }
 
 .filter-section .btn-success {
-  background: linear-gradient(180deg,#2aa76b,#197a43);
+    background: #198754;
+    color: white;
   border: none;
   box-shadow: 0 6px 12px rgba(25,122,67,0.12);
 }
 
 .filter-section .btn-outline-secondary {
+  color:#043d18;
   border-radius: 8px;
+  border:1px solid white;
+  background-color: white;
+}
+.btn:hover{
+  background-color: #043d18;
+  color: white;
 }
 
 .filter-badge {
@@ -628,6 +643,11 @@
   }
   footer a:hover {
     color: #fff;
+  }
+  .footer-img{
+    justify-content: center;
+    align-items: center;
+    display: flex;
   }
 
 
